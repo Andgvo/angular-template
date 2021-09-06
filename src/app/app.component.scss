@@ -1,0 +1,21 @@
+.mat-toolbar{
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 30%);
+    height: 48px;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 10;
+    
+    .name-app{
+        font-size: 1rem !important;
+    }
+}
+
+mat-sidenav-container mat-sidenav.sidenav {
+    position: fixed !important;
+    top: 48px !important;
+    bottom: 0;
+    left: 0;
+    min-width: 150px;
+}

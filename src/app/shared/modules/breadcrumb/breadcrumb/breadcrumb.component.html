@@ -1,0 +1,15 @@
+<nav *ngIf="breadcrumb !== undefined" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+      <li class="breadcrumb-item" *ngFor="let link of breadcrumb.previous">
+          <a [routerLink]="link.path" mat-button > {{link.name}} </a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+          <a mat-button disabled>{{ breadcrumb.name }}</a>
+      </li>
+  </ol>
+</nav>
+
+<div *ngIf="breadcrumb !== undefined" class="col-12">
+  <h1 class="text-center">{{ breadcrumb.name }}</h1>
+  <hr>
+</div>

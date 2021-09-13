@@ -1,7 +1,7 @@
 <nav *ngIf="breadcrumb !== undefined" aria-label="breadcrumb">
   <ol class="breadcrumb">
       <li class="breadcrumb-item" *ngFor="let link of breadcrumb.previous">
-          <a [routerLink]="link.path" mat-button > {{link.name}} </a>
+          <a (click)="goto(link.fullPath)" mat-button > {{link.name}} </a>
       </li>
       <li class="breadcrumb-item active" aria-current="page">
           <a mat-button disabled>{{ breadcrumb.name }}</a>

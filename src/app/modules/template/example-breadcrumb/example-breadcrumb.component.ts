@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ROUTE_LEVEL_3 } from '@shared/routing/AppsRoute';
+import { ROUTE_BREADCRUMB } from '@shared/routing/AppsRoute';
 
 @Component({
   selector: 'app-example-breadcrumb',
@@ -8,7 +8,7 @@ import { ROUTE_LEVEL_3 } from '@shared/routing/AppsRoute';
 })
 export class ExampleBreadcrumbComponent implements OnInit {
 
-  public breadcrumb = ROUTE_LEVEL_3;
+  public breadcrumb = ROUTE_BREADCRUMB;
 
   constructor() {
     console.log(this.breadcrumb);

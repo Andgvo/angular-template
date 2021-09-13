@@ -1,13 +1,7 @@
-<h1>Style</h1>
-<div [innerHTML]="htmlStr"></div>
-<br>
-<input type="text" id="name" name="name" required
-       minlength="4" maxlength="8" size="10">
-<br>
-<div class="transition-page">
-    <div *ngFor="let content of fillerContent, let i = index">
-        <h4>{{ i }}.-</h4>
-        <p>{{content}}</p>
-        <a mat-flat-button color="accent" [routerLink]="'/template/form'">Go to form</a>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+        </div>
     </div>
 </div>

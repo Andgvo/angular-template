@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 const routes: Routes = [ 
   { path: 'home', component: HomeComponent },
   { path: 'template', loadChildren: () => import('@modules/template/template.module').then( m => m.TemplateModule) },
+  { path: '', pathMatch: 'full', redirectTo: 'home'}
 ];
 
 @NgModule({

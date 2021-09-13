@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { cardAnimation } from '@shared/animations/animations';
-import { AppRoute } from '@shared/routing/AppRoute';
+import { Card } from '../models/card';
 
 @Component({
   selector: 'app-ui-cards',
@@ -11,7 +11,7 @@ import { AppRoute } from '@shared/routing/AppRoute';
 })
 export class UICardsComponent {
 
-  @Input() cards: AppRoute[] | undefined;
+  @Input() cards: Card[] | undefined;
   
   constructor(private router:Router) { }
 
@@ -20,8 +20,8 @@ export class UICardsComponent {
       this.router.navigate([url]);
   }
 
-  trackById(index: number, item: AppRoute) {
-    return item.path;
+  trackById(index: number, item: Card) {
+    return item.url;
   }
 
 }

@@ -1,0 +1,317 @@
+<!-- REQUIRED FIELDS -->
+<div *ngIf="showRequired" class="row mt-4">
+  <div class="col">
+    <h6> {{'labels.REQUIRED_FIELDS' }} </h6>
+  </div>
+</div>
+<form (ngSubmit)="onSubmit()" [formGroup]="formGroup" autocomplete="off">
+  <!-- Form Card -->
+  <div class="row mt-3">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div *ngFor="let item of inputs" [class]="col">
+              <div *ngIf="item.visible == null || item.visible" [ngSwitch]="item.type">
+                <!-- TEXT  -->
+                <div *ngSwitchCase="types.text">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{ item.label }}</mat-label>
+                    <input matInput class="form-control" [formControlName]="item.name" [maxlength]="item.maxLength!"
+                      [minlength]="item.minLength!" [required]="item.required || true" [type]="item.type">
+                    <mat-error *ngIf="formGroup.get(item.name)?.invalid && submitted">
+                      <div *ngIf="formGroup.get(item.name)?.getError('required')">
+                        {{ 'Required' }}
+                      </div>
+                      <div *ngIf="formGroup.get(item.name)?.getError('pattern')">
+                        {{ item.regexErrorMsg }}
+                      </div>
+                      <div *ngIf="formGroup.get(item.name)?.getError('minlength')">
+                        {{ 'El mínimo de caracteres es de ' + item.minLength }}
+                      </div>
+                      <div
+                        *ngIf="item.customValidatorName != null && formGroup.get(item.name)?.getError(item.customValidatorName!)">
+                        {{ item.customValidatorMsg! }}
+                      </div>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- TEXT_NUMBER  -->
+                <div *ngSwitchCase="types.textNumber">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{ item.label }}</mat-label>
+                    <input matInput type="text" [formControlName]="item.name" [required]="item.required || true"
+                      appOnlynumber>
+                    <mat-error *ngIf="formGroup.get(item.name)?.invalid && submitted">
+                      <div *ngIf="formGroup.get(item.name)?.getError('required')">
+                        {{ 'Required' }}
+                      </div>
+                      <div *ngIf="formGroup.get(item.name)?.getError('pattern')">
+                        {{ item.regexErrorMsg! }}
+                      </div>
+                      <div
+                        *ngIf="item.customValidatorName != null && formGroup.get(item.name)?.getError(item.customValidatorName!)">
+                        {{ item.customValidatorMsg! }}
+                      </div>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- NUMBER -->
+                <div *ngSwitchCase="types.number">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{ item.label }}</mat-label>
+                    <input matInput type="number" [formControlName]="item.name" [required]="item.required || true"
+                      appOnlynumber>
+                    <mat-error *ngIf="formGroup.get(item.name)?.invalid && submitted">
+                      <div *ngIf="formGroup.get(item.name)?.getError('required')">
+                        {{ 'Required' }}
+                      </div>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- SELECT -->
+                <div *ngSwitchCase="types.select">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{ item.label }}</mat-label>
+                    <mat-select [formControlName]="item.name" [required]="item.required || true">
+
+                      <mat-option *ngFor="let itemSelect of item.optionItems" [value]="itemSelect.value">{{
+                        itemSelect.label
+                        }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formGroup.get(item.name)?.invalid && submitted">
+                      <div *ngIf="formGroup.get(item.name)?.getError('required')">
+                        {{ 'messages.MSG1_INPUT' }}
+                      </div>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- CHECKBOX -->
+                <div *ngSwitchCase="types.checkbox">
+                  <p class="mat-caption">{{ item.label }}</p>
+                  <app-ui-checkbox-group [formControlName]="item.name" [options]="item.optionItems!">
+                  </app-ui-checkbox-group>
+                  <div *ngIf="formGroup.get(item.name)?.invalid && submitted" class="alert alert-danger">
+                    <div *ngIf="formGroup.get(item.name)?.getError('required')">
+                      {{ 'messages.MSG1_INPUT' }}
+                    </div>
+                  </div>
+                </div>
+
+                <!-- RADIO_BUTTON -->
+                <div *ngSwitchCase="types.radioButton">
+                  <p class="mat-caption">{{ item.label }}</p>
+                  <mat-radio-group [formControlName]="item.name">
+                    <mat-radio-button [value]="option.value" *ngFor="let option of item.optionItems">
+                      {{ option.label }}
+                    </mat-radio-button>
+                  </mat-radio-group>
+                  <div *ngIf="formGroup.get(item.name)?.invalid && submitted && submitted" class="alert alert-danger">
+                    <div *ngIf="formGroup.get(item.name)?.getError('required')">
+                      {{ 'messages.MSG1_INPUT' }}
+                    </div>
+                  </div>
+                </div>
+
+                <!-- TEXTAREA -->
+                <div *ngSwitchCase="types.textarea">
+                  <textarea [formControlName]="item.name" [required]="item.required!" [rows]="item.rows ? item.rows : 3"
+                    class="form-control"></textarea>
+                  <div *ngIf="formGroup.get(item.name)?.invalid && submitted" class="alert alert-danger">
+                    <div *ngIf="formGroup.get(item.name)?.getError('required')">
+                      {{ 'messages.MSG1_INPUT' }}
+                    </div>
+                    <div *ngIf="formGroup.get(item.name)?.getError('maxlength')">
+                      {{ 'messages.MSG092' }}
+                    </div>
+                  </div>
+                </div>
+
+                <!-- SWITCH -->
+                <div *ngSwitchCase="types.switch">
+                  <p class="mat-caption">{{ item.label }}</p>
+                  <mat-slide-toggle [formControlName]="item.name" class="pt-1" color="primary">
+                    {{ (formGroup.get(item.name)!.value ? 'Yes' : 'No') }}
+                  </mat-slide-toggle>
+                  <div *ngIf="formGroup.get(item.name)?.invalid && submitted" class="alert alert-danger">
+                    <div *ngIf="formGroup.get(item.name)?.getError('required')">
+                      {{ 'messages.MSG1_INPUT' }}
+                    </div>
+                  </div>
+                </div>
+
+                <!-- DATE -->
+                <div *ngSwitchCase="types.date">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{ item.label }}</mat-label>
+                    <input matInput type="date" [formControlName]="item.name" [required]="item.required || true">
+                    <mat-error *ngIf="formGroup.get(item.name)?.invalid && submitted">
+                      <div *ngIf="formGroup.get(item.name)?.getError('required')">
+                        {{ 'Required' }}
+                      </div>
+                      <div *ngIf="formGroup.get(item.name)?.getError('pattern')">
+                        {{ item.regexErrorMsg! }}
+                      </div>
+                      <div *ngIf="formGroup.get(item.name)?.getError('secondDateBefore')">
+                        {{ 'messages.MSG10_END_DATE' }}
+                      </div>
+                      <div
+                        *ngIf="item.customValidatorName != null && formGroup.get(item.name)?.getError(item.customValidatorName!)">
+                        {{ item.customValidatorMsg! }}
+                      </div>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- TIME -->
+                <div *ngSwitchCase="types.time">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{ item.label }}</mat-label>
+                    <input matInput type="time" [formControlName]="item.name" [required]="item.required || true">
+                    <mat-error *ngIf="formGroup.get(item.name)?.invalid && submitted">
+                      <div *ngIf="formGroup.get(item.name)?.getError('required')">
+                        {{ 'Required' }}
+                      </div>
+                      <div *ngIf="formGroup.get(item.name)?.getError('pattern')">
+                        {{ item.regexErrorMsg! }}
+                      </div>
+                      <div
+                        *ngIf="item.customValidatorName != null && formGroup.get(item.name)?.getError(item.customValidatorName!)">
+                        {{ item.customValidatorMsg! }}
+                      </div>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- TEXT_AND_BUTTON -->
+                <div *ngSwitchCase="types.textAndButton">
+                  <div class="row">
+                    <div class="col-8 px-0">
+                      <input [formControlName]="item.name" [required]="item.required!" autocomplete="off"
+                        class="form-control" type="text">
+                      <div *ngIf="formGroup.get(item.name)?.invalid && submitted" class="alert alert-danger">
+                        <div *ngIf="formGroup.get(item.name)?.getError('required')">
+                          {{ 'messages.MSG1_INPUT' }}
+                        </div>
+                        <div *ngIf="formGroup.get(item.name)?.getError('pattern')">
+                          {{ item.regexErrorMsg! }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4 pr-0">
+                      <button (click)="onComplementButton(item, formGroup.get(item.name)?.value)"
+                        class="btn btn-primary btn-block" type="button"> {{ item.labelButton ? item.labelButton :
+                        'labels.find' }} </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- TEXT_NUMBER_AND_BUTTON -->
+                <div *ngSwitchCase="types.textNumberAndButton">
+                  <div class="row">
+                    <div class="col-8 px-0">
+                      <input [formControlName]="item.name" [required]="item.required!" appOnlynumber autocomplete="off"
+                        class="form-control" type="text">
+                      <div *ngIf="formGroup.get(item.name)?.invalid && submitted" class="alert alert-danger">
+                        <div *ngIf="formGroup.get(item.name)?.getError('required')">
+                          {{ 'messages.MSG1_INPUT' }}
+                        </div>
+                        <div *ngIf="formGroup.get(item.name)?.getError('pattern')">
+                          {{ item.regexErrorMsg! }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4 pr-0">
+                      <button (click)="onComplementButton(item, formGroup.get(item.name)?.value)"
+                        class="btn btn-primary btn-block" type="button"> {{ item.labelButton ? item.labelButton :
+                        'labels.find' }} </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- NUMBER_AND_BUTTON -->
+                <div *ngSwitchCase="types.numberAndButton">
+                  <div class="row">
+                    <div class="col-8 px-0">
+                      <input [formControlName]="item.name" appOnlynumber class="form-control" type="number">
+                      <div *ngIf="formGroup.get(item.name)?.invalid && submitted" class="alert alert-danger">
+                        <div *ngIf="formGroup.get(item.name)?.getError('required')">
+                          {{ 'messages.MSG1_INPUT' }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4 pr-0">
+                      <button (click)="onComplementButton(item, formGroup.get(item.name)?.value)"
+                        class="btn btn-primary btn-block" type="button"> {{ item.labelButton ? item.labelButton :
+                        'labels.find' }} </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- SELECT_AND_BUTTON -->
+                <div *ngSwitchCase="types.selectAndButton">
+                  <div class="row">
+                    <div class="col-8 px-0">
+                      <select [formControlName]="item.name" [required]="item.required!" class="custom-select">
+                        <option disabled value=""></option>
+                        <option *ngFor="let itemSelect of item.optionItems" [value]="itemSelect.value">{{
+                          itemSelect.label
+                          }}</option>
+                      </select>
+                      <div *ngIf="formGroup.get(item.name)?.invalid && submitted" class="alert alert-danger">
+                        <div *ngIf="formGroup.get(item.name)?.getError('required')">
+                          {{ 'messages.MSG1_INPUT' }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4 pr-0">
+                      <button (click)="onComplementButton(item, formGroup.get(item.name)?.value)"
+                        class="btn btn-primary btn-block" type="button"> {{ item.labelButton ? item.labelButton :
+                        'labels.find' }} </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngSwitchCase="types.hidden">
+                  <input [formControlName]="item.name" [type]="item.type">
+                </div>
+
+              </div>
+              <div *ngIf="item.help != null" class="col-sm-2 col-md-1 col-lg-1 col-xl-1 pt-1">
+                <span ata-toggle="tooltip" class="d-inline-block" tabindex="0">
+                  <em class="fa fa-question"></em>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <pre>{{ formGroup.value | json }}</pre>
+  </div>
+
+  <!-- CONTAINER -->
+  <ng-content></ng-content>
+
+  <!-- Buttons -->
+  <div class="row my-3 justify-content-center">
+    <div class="col-12 text-center">
+      <button mat-raised-button color="primary" *ngIf="showSubmit" [disabled]="loading"
+        class="btn btn-primary btn-block" type="submit">
+        {{ submitLabel }}
+        <mat-spinner *ngIf="loading" [diameter]="38" class="loading" color="accent"></mat-spinner>
+      </button>
+      <button mat-raised-button color="accent" *ngIf="showCancel" (click)="onCancel()"
+        class="btn btn-secondary btn-block" type="button">{{ cancelLabel }}</button>
+    </div>
+  </div>
+
+</form>

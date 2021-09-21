@@ -9,9 +9,9 @@ import { ROUTE_BREADCRUMB } from '@shared/routing/AppsRoute';
 export class ExampleBreadcrumbComponent implements OnInit {
 
   public breadcrumb = ROUTE_BREADCRUMB;
+  public componentStr = '<app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>';
 
   constructor() {
-    console.log(this.breadcrumb);
   }
 
   ngOnInit(): void {

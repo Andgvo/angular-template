@@ -1,14 +1,16 @@
 export class AppRoute {
     name: string;
     path: string;
+    icon?: string;
     fullPath: string;
     module?: string;
     fullModule: string;
     previous?: AppRoute[];
 
-    constructor(name: string, path: string, previousRoute?: AppRoute, module?: string) {
+    constructor(name: string, icon: string | undefined, path: string, previousRoute?: AppRoute, module?: string) {
         this.name = name;
         this.path = path;
+        this.icon = icon;
         this.fullModule = module ?? '';
         if (previousRoute !== undefined && module === undefined) { // Case node
             this.fullModule = previousRoute?.fullModule;

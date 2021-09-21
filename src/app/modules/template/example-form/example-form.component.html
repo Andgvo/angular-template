@@ -2,6 +2,7 @@
     <div class="row">
         <div class="col">
             <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+            <app-ui-form [inputs]="inputs" (submit)="onSubmit($event)" ></app-ui-form>
         </div>
     </div>
 </div>

@@ -1,7 +1,18 @@
 <div class="container">
+    <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
     <div class="row">
         <div class="col">
-            <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+            <p>You can configure default color in src/assets/sass/palette.scss</p>
+           <div class="alert alert-secondary">
+                <pre>
+                    $primary: #051e34;
+                    $secondary: #6c757d;
+                    $success: #28a745;
+                    $info: #17a2b8;
+                    $warning: #ffc107;
+                    $danger: #dc3545;
+                </pre>
+           </div>
         </div>
     </div>
 </div>

@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { BreadcrumbModule } from 'src/app/shared/modules/breadcrumb/breadcrumb.module';
 import { UIContextModule } from 'src/app/shared/modules/ui-context/ui-context.module';
 import { ExampleButtonsComponent } from './example-buttons/example-buttons.component';
+import { UIFormModule } from '@shared/modules/ui-form/ui-form.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ExampleButtonsComponent } from './example-buttons/example-buttons.compo
     TemplateRoutingModule,
     MatButtonModule,
     BreadcrumbModule,
-    UIContextModule
+    UIContextModule,
+    UIFormModule
   ]
 })
 export class TemplateModule { }

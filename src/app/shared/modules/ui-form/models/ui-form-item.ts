@@ -48,6 +48,10 @@ export interface UIFormItem {
    */
   optionItems?: UIOptionItem[];
   /**
+   * Boostrap cool distrubution
+   */
+  col?: string;
+  /**
    * Textarea number of rows
    */
   rows?: number;
@@ -61,7 +65,7 @@ export interface UIFormItem {
   regexErrorMsg?: string;
   customValidatorName?: string;
   customValidatorMsg?: string;
-  value?: string;
+  value?: string | number | boolean;
   help?: string;
   visible?: boolean;
   /**

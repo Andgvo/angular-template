@@ -29,7 +29,8 @@ export class ExampleFormComponent implements OnInit {
     { name: 'gender', label: 'Gender', type: UIInputType.select, optionItems: this.optionItems },
     { name: 'birthday', label: 'Birthday', type: UIInputType.date },
     { name: 'startTime', label: 'Star time', type: UIInputType.time },
-    { name: 'switch', label: 'Switch', type: UIInputType.switch },
+    { name: 'switch', label: 'Switch', type: UIInputType.switch, value: false },
+    { name: 'description', label: 'Description', type: UIInputType.textarea },
     { name: 'radio', label: 'Radio button', type: UIInputType.radioButton, optionItems: this.optionItems },
     { name: 'checkbox', label: 'Checkbox', type: UIInputType.checkbox, optionItems: this.optionItems },
   ];
@@ -40,6 +41,10 @@ export class ExampleFormComponent implements OnInit {
   }
 
   onSubmit(form:FormGroup){
-    console.log(form.value);
+    if(form.valid){
+      console.log(form.value);
+    }else{
+      console.error('Not valid form');
+    }
   }
 }

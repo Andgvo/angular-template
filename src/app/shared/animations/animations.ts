@@ -15,3 +15,12 @@ export function cardAnimation() {
         ]),
     ])
 }
+
+export function fadeInDown() {
+    return trigger('fadeInDown', [
+        transition(':enter', [
+            style({ opacity: '0', transform: 'translateY(-1px)' }),
+            animate('.15s .2s ease-in-out', style({ opacity: '1', transform: 'translateY(0)' }))
+        ])
+    ]);
+}

@@ -1,4 +1,4 @@
-import {Directive, ElementRef, HostListener} from '@angular/core';
+import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
   selector: '[appOnlynumber]'
@@ -25,7 +25,7 @@ export class OnlyNumberDirective {
   }
 
   @HostListener('keydown', ['$event'])
-  onKeyDown(e: KeyboardEvent) {
+  onKeyDown(e: KeyboardEvent) {    
     if (
       this.navigationKeys.indexOf(e.key) > -1 || // Allow: navigation keys: backspace, delete, arrows etc.
       (e.key === 'a' && e.ctrlKey === true) || // Allow: Ctrl+A
@@ -44,7 +44,7 @@ export class OnlyNumberDirective {
       e.key === '0' || e.key === '1' || e.key === '2' ||
       e.key === '3' || e.key === '4' || e.key === '5' ||
       e.key === '6' || e.key === '7' || e.key === '8' ||
-      e.key === '9'
+      e.key === '9' || e.key === 'ArrowUp' || e.key === 'ArrowDown'
     ) {
     } else {
       e.preventDefault();

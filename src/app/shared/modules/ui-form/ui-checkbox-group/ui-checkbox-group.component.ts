@@ -13,8 +13,7 @@ import {UIOptionItem} from '../models/ui-option-item';
             </mat-checkbox>
         </div>
     </div>
-    `,
-  //styleUrls: ['./main-checkbox-list.component.scss'],
+  `,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

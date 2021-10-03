@@ -4,14 +4,14 @@
     <h6> {{'labels.REQUIRED_FIELDS' }} </h6>
   </div>
 </div>
-<form (ngSubmit)="onSubmit()" [formGroup]="formGroup" autocomplete="off">
+<form (ngSubmit)="submit()" [formGroup]="formGroup" autocomplete="off">
   <!-- Form Card -->
   <div class="row mt-3">
     <div class="col-12">
       <div class="card">
         <div class="card-body">
           <div class="row">
-            <div *ngFor="let item of inputs" [class]="col">
+            <div *ngFor="let item of inputs" [class]="item.col || col">
               <div *ngIf="item.visible == null || item.visible" [ngSwitch]="item.type">
                 <!-- TEXT  -->
                 <div *ngSwitchCase="types.text">
@@ -93,43 +93,55 @@
 
                 <!-- CHECKBOX -->
                 <div *ngSwitchCase="types.checkbox">
-                  <p class="mat-caption">{{ item.label }}</p>
-                  <app-ui-checkbox-group [formControlName]="item.name" [options]="item.optionItems!">
-                  </app-ui-checkbox-group>
-                  <div *ngIf="formGroup.get(item.name)?.invalid && submitted" class="alert alert-danger">
-                    <div *ngIf="formGroup.get(item.name)?.getError('required')">
-                      {{ 'messages.MSG1_INPUT' }}
+                  <div class="padding-option">
+                    <p class="mat-caption" [class.mat-error]="formGroup.get(item.name)?.invalid && submitted">
+                      {{ item.label }} <span *ngIf="(item.required === undefined) || item.required">*</span>
+                    </p>
+                    <app-ui-checkbox-group [formControlName]="item.name" [options]="item.optionItems!" [required]="item.required || true">
+                    </app-ui-checkbox-group>
+                    <div *ngIf="formGroup.get(item.name)?.invalid && submitted" @fadeInDown>
+                      <div *ngIf="formGroup.get(item.name)?.getError('required')" class="mat-caption mat-error error-option">
+                        Required
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 <!-- RADIO_BUTTON -->
                 <div *ngSwitchCase="types.radioButton">
-                  <p class="mat-caption">{{ item.label }}</p>
-                  <mat-radio-group [formControlName]="item.name">
-                    <mat-radio-button [value]="option.value" *ngFor="let option of item.optionItems">
-                      {{ option.label }}
-                    </mat-radio-button>
-                  </mat-radio-group>
-                  <div *ngIf="formGroup.get(item.name)?.invalid && submitted && submitted" class="alert alert-danger">
-                    <div *ngIf="formGroup.get(item.name)?.getError('required')">
-                      {{ 'messages.MSG1_INPUT' }}
+                  <div class="padding-option">
+                    <p class="mat-caption" [class.mat-error]="formGroup.get(item.name)?.invalid && submitted">
+                      {{ item.label }} <span *ngIf="(item.required === undefined) || item.required">*</span>
+                    </p>
+                    <mat-radio-group [formControlName]="item.name" class="row">
+                      <mat-radio-button [value]="option.value" *ngFor="let option of item.optionItems" [class]="option.col || 'col-12'"
+                        [class.mat-error]="formGroup.get(item.name)?.invalid && submitted">
+                        {{ option.label }}
+                      </mat-radio-button>
+                    </mat-radio-group>
+                    <div *ngIf="formGroup.get(item.name)?.invalid && submitted && submitted" @fadeInDown>
+                      <div *ngIf="formGroup.get(item.name)?.getError('required')" class="mat-caption mat-error error-option">
+                        Required
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 <!-- TEXTAREA -->
                 <div *ngSwitchCase="types.textarea">
-                  <textarea [formControlName]="item.name" [required]="item.required!" [rows]="item.rows ? item.rows : 3"
-                    class="form-control"></textarea>
-                  <div *ngIf="formGroup.get(item.name)?.invalid && submitted" class="alert alert-danger">
-                    <div *ngIf="formGroup.get(item.name)?.getError('required')">
-                      {{ 'messages.MSG1_INPUT' }}
-                    </div>
-                    <div *ngIf="formGroup.get(item.name)?.getError('maxlength')">
-                      {{ 'messages.MSG092' }}
-                    </div>
-                  </div>
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{ item.label }}</mat-label>
+                    <textarea matInput [formControlName]="item.name" [required]="item.required!" [rows]="item.rows ? item.rows : 3"
+                      class="form-control"></textarea>
+                    <mat-error *ngIf="formGroup.get(item.name)?.invalid && submitted">
+                      <div *ngIf="formGroup.get(item.name)?.getError('required')">
+                        Required
+                      </div>
+                      <div *ngIf="formGroup.get(item.name)?.getError('maxlength')">
+                        {{ 'messages.MSG092' }}
+                      </div>
+                    </mat-error>
+                  </mat-form-field>
                 </div>
 
                 <!-- SWITCH -->
@@ -309,7 +321,7 @@
         {{ submitLabel }}
         <mat-spinner *ngIf="loading" [diameter]="38" class="loading" color="accent"></mat-spinner>
       </button>
-      <button mat-raised-button color="accent" *ngIf="showCancel" (click)="onCancel()"
+      <button mat-raised-button color="accent" *ngIf="showCancel" (click)="cancel()"
         class="btn btn-secondary btn-block" type="button">{{ cancelLabel }}</button>
     </div>
   </div>

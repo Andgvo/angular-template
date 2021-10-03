@@ -1,12 +1,14 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { fadeInDown } from '@shared/animations/animations';
 import { UIInputType } from '../models/input-type';
 import { UIFormItem } from '../models/ui-form-item';
 
 @Component({
   selector: 'app-ui-form',
   templateUrl: './ui-form.component.html',
-  styleUrls: ['./ui-form.component.scss']
+  styleUrls: ['./ui-form.component.scss'],
+  animations:[fadeInDown()]
 })
 export class UIFormComponent implements OnChanges {
 
@@ -22,8 +24,8 @@ export class UIFormComponent implements OnChanges {
   @Input() showRequired = true;
   @Input() submitted = false;
   @Input() loading = false;
-  @Output() submit = new EventEmitter<FormGroup>();
-  @Output() cancel = new EventEmitter<boolean>();
+  @Output() onSubmit = new EventEmitter<FormGroup>();
+  @Output() onCancel = new EventEmitter<boolean>();
 
   formGroup: FormGroup = new FormGroup({});
   types = UIInputType;
@@ -48,15 +50,14 @@ export class UIFormComponent implements OnChanges {
     }
     if (changes.object && this.object != null) {
       setTimeout(() => {
-      }, 1000);
-      console.log(this.object);
-      if (this.inputs.length !== 0) {
-        this.inputs.forEach(input => {
-          if (this.object[input.name] != null) {
-            this.formGroup.get(input.name)?.setValue(this.object[input.name]);
-          }
-        });
-      }
+        if (this.inputs.length !== 0) {
+          this.inputs.forEach(input => {
+            if (this.object[input.name] != null) {
+              this.formGroup.get(input.name)?.setValue(this.object[input.name]);
+            }
+          });
+        }
+      }, 500);
     }
     if (changes.validators) {
       this.formGroup.setValidators(this.validators);
@@ -73,14 +74,13 @@ export class UIFormComponent implements OnChanges {
   }
 
   ////////////////  FUNCTIONS //////////////////
-  onSubmit() {
+  submit() {
     this.submitted = true;
-    console.log(" INSIDE :v");
-    this.submit.emit(this.formGroup);
+    this.onSubmit.emit(this.formGroup);
   }
 
-  onCancel() {
-    this.cancel.emit(true);
+  cancel() {
+    this.onCancel.emit(true);
   }
 
   /**
@@ -91,7 +91,7 @@ export class UIFormComponent implements OnChanges {
    */
   private addValidators(item: UIFormItem): ValidatorFn[] {
     const validators: ValidatorFn[] = [];
-    if (item.required) {
+    if ((item.required === undefined) || item.required) {
       validators.push(Validators.required);
     }
     if (item.regex) {

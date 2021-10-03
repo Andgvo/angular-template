@@ -4,11 +4,16 @@
   top: 0;
   left: 45%;
 }
-
 button {
-    margin: 15px;
+  margin: 15px;
 }
-
-.mat-caption{
+.mat-caption {
   padding: 0 0.75rem;
+  transition: all 0.2s;
+}
+.padding-option {
+  padding: 0 0.75rem;
+}
+.error-option {
+  margin-top: 0.6666666667em;
 }

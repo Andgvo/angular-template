@@ -4,17 +4,19 @@ import { fadeInDown } from '@shared/animations/animations';
 import { UIInputType } from '../models/input-type';
 import { UIFormItem } from '../models/ui-form-item';
 
+declare type ValueType = number | string | boolean;
+declare type ObjetInput = Record<string, ValueType>;
 @Component({
   selector: 'app-ui-form',
   templateUrl: './ui-form.component.html',
   styleUrls: ['./ui-form.component.scss'],
-  animations:[fadeInDown()]
+  animations: [fadeInDown()]
 })
 export class UIFormComponent implements OnChanges {
 
   @Input() title = '';
   @Input() inputs: UIFormItem[] = [];
-  @Input() object: any = null;
+  @Input() object: ObjetInput | undefined = undefined;
   @Input() col: string = 'col-12 col-sm-6 col-md-4';
   @Input() validators: ValidatorFn | ValidatorFn[] = [];
   @Input() showSubmit = true;
@@ -40,7 +42,7 @@ export class UIFormComponent implements OnChanges {
       inputs.forEach(input => {
         const control = new FormControl(
           { value: input.value ?? '', disabled: input.disabled ?? false }, this.addValidators(input));
-        //input.control = control;
+        input.control = control;
         if (input.onChanges) {
           control.valueChanges.subscribe(input.onChanges);
         }
@@ -48,11 +50,11 @@ export class UIFormComponent implements OnChanges {
       });
       this.formGroup.setValidators(this.validators);
     }
-    if (changes.object && this.object != null) {
+    if (changes.object && this.object != undefined) {
       setTimeout(() => {
         if (this.inputs.length !== 0) {
           this.inputs.forEach(input => {
-            if (this.object[input.name] != null) {
+            if (this.object !== undefined && this.object[input.name] !== null ) {
               this.formGroup.get(input.name)?.setValue(this.object[input.name]);
             }
           });
@@ -64,7 +66,6 @@ export class UIFormComponent implements OnChanges {
     }
   }
 
-  /////////////// UTILS //////////////////////
   onComplementButton(item: UIFormItem, value: any) {
     if (item.onClickButton) {
       item.onClickButton(value);
@@ -73,7 +74,6 @@ export class UIFormComponent implements OnChanges {
     }
   }
 
-  ////////////////  FUNCTIONS //////////////////
   submit() {
     this.submitted = true;
     this.onSubmit.emit(this.formGroup);

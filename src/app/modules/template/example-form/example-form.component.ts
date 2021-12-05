@@ -34,16 +34,30 @@ export class ExampleFormComponent implements OnInit {
     { name: 'radio', label: 'Radio button', type: UIInputType.radioButton, optionItems: this.optionItems },
     { name: 'checkbox', label: 'Checkbox', type: UIInputType.checkbox, optionItems: this.optionItems },
   ];
+  public exampleObject = {
+    name: 'Andres',
+    lastname: 'Lopez',
+    disabled: 'Other name',
+    age: 24,
+    phone: '5512345678',
+    gender: 2,
+    birthday: "0123-03-12",
+    checkbox: [2],
+    description: "12313",
+    radio: 1,
+    startTime: "12:03",
+    switch: true
+  };
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onSubmit(form:FormGroup){
-    if(form.valid){
+  onSubmit(form: FormGroup) {
+    if (form.valid) {
       console.log(form.value);
-    }else{
+    } else {
       console.error('Not valid form');
     }
   }

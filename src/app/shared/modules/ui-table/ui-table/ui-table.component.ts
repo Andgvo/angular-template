@@ -2,6 +2,7 @@ import { AfterViewInit, Component, Input, OnChanges, SimpleChanges, ViewChild } 
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { fadeInDown } from '@shared/animations/animations';
 import { UITableItem } from '../models/ui-table-item';
 
 /**
@@ -13,28 +14,26 @@ import { UITableItem } from '../models/ui-table-item';
 @Component({
   selector: 'app-ui-table',
   templateUrl: './ui-table.component.html',
-  styleUrls: ['./ui-table.component.scss']
+  styleUrls: ['./ui-table.component.scss'],
+  animations: [fadeInDown()]
 })
 export class UITableComponent<T> implements OnChanges, AfterViewInit {
 
   @Input() items: UITableItem[] = [];
   @Input() data: T[] = [];
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | null;
-  @ViewChild(MatSort, { static: true }) sort: MatSort | null;
-
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | null = null;
+  @ViewChild(MatSort, { static: true }) sort: MatSort | null = null;
+ 
   public displayedColumns: string[] = [];
   public dataSource = new MatTableDataSource<T>();
 
-  constructor() {
-    this.paginator = null;
-    this.sort = null;
-  }
+  constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes.items && this.items !== null ){ 
+    if (changes.items && this.items !== null) {
       this.displayedColumns = this.items.map(item => item.name);
     }
-    if(changes.data && this.data !== null ){
+    if (changes.data && this.data !== null) {
       this.dataSource.data = this.data;
     }
   }

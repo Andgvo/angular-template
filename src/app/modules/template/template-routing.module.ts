@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: ROUTE_BUTTONS.path, component: ExampleButtonsComponent },
   { path: ROUTE_DYNAMIC_FORM.path, component: ExampleFormComponent },
   { path: ROUTE_TABLE.path, component: ExampleTableComponent },
-  { path: '', pathMatch: 'full', redirectTo: 'breadcrumb' }
+  { path: '**', pathMatch: 'full', redirectTo: 'breadcrumb' }
 ];
 
 @NgModule({

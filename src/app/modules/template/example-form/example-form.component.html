@@ -1,8 +1,13 @@
 <div class="container">
     <div class="row">
-        <div class="col">
+        <div class="col-12">
             <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+        </div>
+        <div class="col-12">
             <app-ui-form [inputs]="inputs" (onSubmit)="onSubmit($event)"></app-ui-form>
+        </div>
+        <div class="col-12">
+            <app-ui-form [inputs]="inputs" [object]="exampleObject" (onSubmit)="onSubmit($event)"></app-ui-form>
         </div>
     </div>
 </div>

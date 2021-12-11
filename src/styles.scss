@@ -2,19 +2,19 @@
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
 // Plus imports for other components in your app.
-@use './assets/sass/palette.scss' as palette;
+@use './assets/sass/palette.scss';
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
 $my-custom-typography: mat.define-typography-config(
   $font-family: 'Open Sans',
-  $headline: mat.define-typography-level(2.3rem, 1, 600),
+  $headline: mat.define-typography-level(2rem, 1, 600),
   $title: mat.define-typography-level(1.9rem, 1, 600),
   $subheading-2: mat.define-typography-level(1.7rem, 1, 600),
   $subheading-1: mat.define-typography-level(1.4rem, 1, 600),
-  $body-1: mat.define-typography-level(1rem, 1.4, 500),
-  $body-2: mat.define-typography-level(1rem, 1.4, 600),
+  $body-1: mat.define-typography-level(0.9rem, 1.4, 500),
+  $body-2: mat.define-typography-level(0.9rem, 1.4, 600),
   $button: mat.define-typography-level(1rem, 1, 500),
 );
 
@@ -55,11 +55,14 @@ $custom-colors-keys: map-remove(palette.$custom-colors, contrast);
       color: map-get($custom-colors, $key);
     }
   }
-  .alert-#{$key}{
-    background-color: map-get($custom-colors, $key);
-  }
   .bd-callout-#{$key}{
     border-left-color: map-get($custom-colors, $key) !important;
+  }
+  .card-header{
+    &.mat-#{$key}{
+      background-color: map-get($custom-colors, $key) !important;
+      color: map-get($custom-colors, contrast, $key) !important;
+    }
   }
 }
 
@@ -68,22 +71,36 @@ $custom-colors-keys: map-remove(palette.$custom-colors, contrast);
 // that you are using.
 @include mat.all-component-themes($angular-template-theme);
 
+/////////////////////// BOOTSTRAP ///////////////////////////////
+// Override
+$primary: palette.$primary;
+$secondary: palette.$secondary;
+$success: palette.$success;
+$info: palette.$info;
+$warning: palette.$warning;
+$danger: palette.$danger;
+$light: palette.$light;
+$dark: palette.$dark;
+
 // Bootstrap imports
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/mixins";
 @import "../node_modules/bootstrap/scss/bootstrap-grid.scss";
-@import "../node_modules/bootstrap/scss/mixins/border-radius";
-@import "../node_modules/bootstrap/scss/mixins/box-shadow";
-@import "../node_modules/bootstrap/scss/mixins/alert";
-@import "../node_modules/bootstrap/scss/mixins/gradients";
+@import "../node_modules/bootstrap/scss/containers";
 @import "../node_modules/bootstrap/scss/card";
 @import "../node_modules/bootstrap/scss/alert";
 
 html, body { height: 100%; }
 body { margin: 0; }
 
-.container{
-  padding: 20px 2rem;
-  margin: 48px auto;
-  width: initial;
+.container {
+  padding-top: 60px;
+  padding-bottom: 2rem;
+  width: inherit;
+}
+
+.no-border {
+  border: 0 !important;
 }
 
 /* Override styles */

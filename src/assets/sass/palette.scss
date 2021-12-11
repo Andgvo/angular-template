@@ -1,41 +1,43 @@
-$primary: #051e34; /*#007bff #069*/
-$secondary: #6c757d;
+$primary: #171717; /*#069*/
+$secondary: #52489C;
 $success: #28a745;
-$info: #17a2b8;
+$info: #4062BB;
 $warning: #ffc107;
 $danger: #dc3545;
+$light: #fafafa;
+$dark: #101010;
 
 $md-primary: (
-    50: #e1e4e7,
-    100: #b4bcc2,
-    200: #828f9a,
-    300: #506271,
-    400: #2b4052,
-    500: #051e34,
-    600: #041a2f,
-    700: #041627,
-    800: #031221,
-    900: #010a15,
-    A100: #5588ff,
-    A200: #2264ff,
-    A400: #0047ee,
-    A700: #0040d4,
+    50 : #e3e3e3,
+    100 : #b9b9b9,
+    200 : #8b8b8b,
+    300 : #5d5d5d,
+    400 : #3a3a3a,
+    500 : #171717,
+    600 : #141414,
+    700 : #111111,
+    800 : #0d0d0d,
+    900 : #070707,
+    A100 : #ff5050,
+    A200 : #ff1d1d,
+    A400 : #e90000,
+    A700 : #cf0000,
     contrast: (
-        50: #000000,
-        100: #000000,
-        200: #000000,
-        300: #ffffff,
-        400: #ffffff,
-        500: #ffffff,
-        600: #ffffff,
-        700: #ffffff,
-        800: #ffffff,
-        900: #ffffff,
-        A100: #000000,
-        A200: #ffffff,
-        A400: #ffffff,
-        A700: #ffffff,
-    ),
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #ffffff,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
 );
 
 $custom-colors: (

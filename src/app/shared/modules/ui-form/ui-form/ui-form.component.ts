@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { fadeInDownLabel } from '@shared/animations/animations';
+import { fadeInDown } from '@shared/animations/animations';
 import { UIInputType } from '../models/input-type';
 import { UIFormItem } from '../models/ui-form-item';
 
@@ -10,7 +10,7 @@ declare type ObjetInput = Record<string, ValueType | ValueType[]>;
   selector: 'app-ui-form',
   templateUrl: './ui-form.component.html',
   styleUrls: ['./ui-form.component.scss'],
-  animations: [fadeInDownLabel()]
+  animations: [fadeInDown()]
 })
 export class UIFormComponent implements OnChanges {
 
@@ -22,8 +22,7 @@ export class UIFormComponent implements OnChanges {
   @Input() showSubmit = true;
   @Input() submitLabel = 'Accept';
   @Input() showCancel = true;
-  @Input() cancelLabel = 'Cancel';
-  @Input() showRequired = true;
+  @Input() cancelLabel = 'Cancel'; 
   @Input() submitted = false;
   @Input() loading = false;
   @Output() onSubmit = new EventEmitter<FormGroup>();

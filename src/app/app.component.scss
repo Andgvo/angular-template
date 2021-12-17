@@ -1,5 +1,4 @@
 .mat-toolbar {
-    box-shadow: 0px 3px 3px 0 rgb(0 0 0 / 30%);
     background-color: #fafafa;
     height: 48px;
     left: 0;
@@ -11,6 +10,10 @@
     .name-app {
         font-size: 1rem !important;
     }
+}
+
+.spacer {
+    flex: 1 1 auto;
 }
 
 mat-sidenav-container {
@@ -31,8 +34,7 @@ mat-sidenav-container {
 }
 
 .mat-list-base .mat-list-item {
-    /*font-size: inherit !important;*/
-    font-size: 14px !important;
+    font-size: inherit !important;
     border-top-right-radius: 66px;
     border-bottom-right-radius: 66px;
 

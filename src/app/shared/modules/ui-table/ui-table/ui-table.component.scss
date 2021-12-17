@@ -1,7 +1,22 @@
+@import "~src/assets/sass/palette";
+
 table {
     width: 100%;
 }
 
 :host ::ng-deep .not-padding .mat-form-field-wrapper {
     padding-bottom: 0px !important;
+}
+
+.mat-row:hover .mat-cell {
+    background-color: rgb(0 0 0 / 3%);
+}
+
+th.mat-header-cell {
+    border-bottom: 2px solid $warning;
+}
+
+table.mat-table {
+    padding-right: 10px;
+    padding-left: 10px;
 }

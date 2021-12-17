@@ -1,17 +1,31 @@
-<mat-toolbar >
+<mat-toolbar class="mat-elevation-z5">
     <button mat-icon-button (click)="snav.toggle()">
         <mat-icon>menu</mat-icon>
     </button>
     <h2 class="mx-2"><img src="favicon.ico" width="22px" alt="..." class="app-icon rounded"></h2>
-    <h2 class="name-app">        
+    <h2 class="name-app">
         Angular template
     </h2>
+    <span class="spacer"></span>
+    <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon> User name
+    </button>
+    <mat-menu #menu="matMenu" xPosition="before">
+        <button mat-menu-item>
+            <mat-icon>settings</mat-icon>
+            <span class="me-2">Settings</span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon>logout</mat-icon>
+            <span class="me-2">Logout</span>            
+        </button>
+    </mat-menu>
 </mat-toolbar>
 
 <mat-sidenav-container class="mat-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 0 : 0">
     <!-- Sidenav -->
-    <mat-sidenav class="sidenav" [opened]="true" #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
-        fixedTopGap="56">
+    <mat-sidenav class="sidenav" [opened]="true" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+        [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
         <mat-nav-list>
             <a mat-list-item routerLinkActive (click)="goto(nav.url)" *ngFor="let nav of navItems">
                 <span class="pe-2" *ngIf="nav.icon !== undefined">

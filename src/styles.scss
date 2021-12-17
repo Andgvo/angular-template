@@ -2,7 +2,7 @@
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
 // Plus imports for other components in your app.
-@use './assets/sass/palette.scss';
+@use './assets/sass/palette.scss' as palette;
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
@@ -15,7 +15,7 @@ $my-custom-typography: mat.define-typography-config(
   $subheading-1: mat.define-typography-level(1.4rem, 1, 600),
   $body-1: mat.define-typography-level(0.9rem, 1.4, 500),
   $body-2: mat.define-typography-level(0.9rem, 1.4, 600),
-  $button: mat.define-typography-level(1rem, 1, 500),
+  $button: mat.define-typography-level(0.9rem, 1, 500),
 );
 
 @include mat.core($my-custom-typography);
@@ -150,4 +150,28 @@ hr {
 .mat-form-field-subscript-wrapper {
   position: relative !important;
   padding-bottom: 0 !important;
+}
+
+.fast {
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animated-row {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  animation-name: fadeIn;
 }

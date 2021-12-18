@@ -10,6 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { UICheckboxGroupComponent } from './ui-checkbox-group/ui-checkbox-group.component';
 import { UIFormComponent } from './ui-form/ui-form.component';
+import { UIMoneyComponent } from './ui-money/ui-money.component';
 import { OnlyNumberDirective } from './utils/only-number.directive';
 
 @NgModule({
@@ -25,7 +26,7 @@ import { OnlyNumberDirective } from './utils/only-number.directive';
     MatSlideToggleModule,
     MatProgressSpinnerModule,
   ],
-  declarations: [UIFormComponent, UICheckboxGroupComponent, OnlyNumberDirective],
+  declarations: [UIFormComponent, UICheckboxGroupComponent, UIMoneyComponent, OnlyNumberDirective],
   exports: [UIFormComponent, OnlyNumberDirective]
 })
 export class UIFormModule {

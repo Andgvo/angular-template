@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { UIInputType } from '@shared/modules/ui-form/models/input-type';
-import { UIFormItem } from '@shared/modules/ui-form/models/ui-form-item';
+import { UIFormItemType } from '@shared/modules/ui-form/models/ui-form-item';
 import { UIOptionItem } from '@shared/modules/ui-form/models/ui-option-item';
 import { ROUTE_DYNAMIC_FORM } from '@shared/routing/AppsRoute';
 
@@ -13,6 +13,7 @@ import { ROUTE_DYNAMIC_FORM } from '@shared/routing/AppsRoute';
 export class ExampleFormComponent implements OnInit {
 
   public breadcrumb = ROUTE_DYNAMIC_FORM;
+
   public optionItems: UIOptionItem[] = [
     { value: 1, label: 'Option 1' },
     { value: 2, label: 'Option 2' },
@@ -20,20 +21,41 @@ export class ExampleFormComponent implements OnInit {
     { value: 4, label: 'Option 4' },
     { value: 5, label: 'Option 5' }
   ];
-  public inputs: UIFormItem[] = [
-    { name: 'name', label: 'Name', type: UIInputType.text },
-    { name: 'lastname', label: 'Lastname', type: UIInputType.text },
-    { name: 'disabled', label: 'Disabled', type: UIInputType.text, disabled: true, required: false, value: 'I was disabled' },
-    { name: 'age', label: 'Age', type: UIInputType.number },
-    { name: 'phone', label: 'Phone', type: UIInputType.textNumber },
-    { name: 'gender', label: 'Gender', type: UIInputType.select, optionItems: this.optionItems },
-    { name: 'birthday', label: 'Birthday', type: UIInputType.date },
-    { name: 'startTime', label: 'Star time', type: UIInputType.time },
-    { name: 'switch', label: 'Switch', type: UIInputType.switch, value: false },
-    { name: 'description', label: 'Description', type: UIInputType.textarea },
-    { name: 'radio', label: 'Radio button', type: UIInputType.radioButton, optionItems: this.optionItems },
-    { name: 'checkbox', label: 'Checkbox', type: UIInputType.checkbox, optionItems: this.optionItems },
+  public inputs: UIFormItemType = {
+    name: { label: 'Name', type: UIInputType.text },
+    lastname: { label: 'Lastname', type: UIInputType.text },
+    disabled: { label: 'Disabled', type: UIInputType.text, disabled: true, required: false, value: 'I was disabled' },
+    money: { label: 'Money', type: UIInputType.money },
+    age: { label: 'Age', type: UIInputType.number },
+    phone: { label: 'Phone', type: UIInputType.textNumber },
+    gender: { label: 'Gender', type: UIInputType.select, optionItems: this.optionItems },
+    birthday: { label: 'Birthday', type: UIInputType.date },
+    startTime: { label: 'Star time', type: UIInputType.time },
+    switch: { label: 'Switch', type: UIInputType.switch, value: false },
+    description: { label: 'Description', type: UIInputType.textarea },
+    radio: { label: 'Radio button', type: UIInputType.radioButton, optionItems: this.optionItems },
+    checkbox: { label: 'Checkbox', type: UIInputType.checkbox, optionItems: this.optionItems },
+  };
+  public optionItemsDynamic: UIOptionItem[] = [
+    { value: 1, label: 'Option 1' },
+    { value: 2, label: 'Option 2' },
   ];
+  public dynamicInputs: UIFormItemType = {
+    show: {
+      label: 'Show', type: UIInputType.select, optionItems: this.optionItemsDynamic,
+      onChanges: (value) => this.hideOption(value)
+    },
+    enable: {
+      label: 'Enable', type: UIInputType.select, optionItems: this.optionItemsDynamic,
+      onChanges: (value) => this.disabledOption(value)
+    },
+    disabled: {
+      label: 'Disabled', type: UIInputType.text, required: false
+    },
+    hidden: {
+      label: 'Gender', type: UIInputType.hidden, required: false
+    },
+  };
   public exampleObject = {
     name: 'Andres',
     lastname: 'Lopez',
@@ -61,4 +83,23 @@ export class ExampleFormComponent implements OnInit {
       console.error('Not valid form');
     }
   }
+
+  hideOption(value: number) {
+    if (value === 1) {
+      this.dynamicInputs.hidden.type = UIInputType.text
+    } else if (value === 2) {
+      this.dynamicInputs['hidden'].type = UIInputType.hidden
+    }
+  }
+
+  disabledOption(value: number) {
+    if (value === 1) {
+      this.disabledControl?.disable();
+    } else if (value === 2) {
+      this.disabledControl?.enable();
+    }
+  }
+
+  get disabledControl() { return this.dynamicInputs.disabled.control; }
+
 }

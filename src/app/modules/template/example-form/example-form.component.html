@@ -1,13 +1,16 @@
 <div class="container">
     <div class="row">
-        <div class="col-12">
+        <div class="col-12">            
             <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+        </div>        
+        <div class="col-12 pb-5">            
+            <app-ui-form [title]="'Generic example form with all options'" [items]="inputs" (onSubmit)="onSubmit($event)"></app-ui-form>
         </div>
-        <div class="col-12">
-            <app-ui-form [inputs]="inputs" (onSubmit)="onSubmit($event)"></app-ui-form>
+        <div class="col-12">            
+            <app-ui-form [title]="'Generic form with set values'" [items]="inputs" [object]="exampleObject" (onSubmit)="onSubmit($event)"></app-ui-form>
         </div>
-        <div class="col-12">
-            <app-ui-form [inputs]="inputs" [object]="exampleObject" (onSubmit)="onSubmit($event)"></app-ui-form>
+        <div class="col-12 pb-5">            
+            <app-ui-form [title]="'Dynamic hide and show'" [items]="dynamicInputs" (onSubmit)="onSubmit($event)"></app-ui-form>
         </div>
     </div>
 </div>

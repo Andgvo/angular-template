@@ -10,9 +10,6 @@ export enum UIInputType {
   time = 'time',
   switch = 'switch',
   file = 'file',
-  textAndButton = 'text-and-button',
-  textNumberAndButton = 'text-number-and-button',
-  numberAndButton = 'number-and-button',
-  selectAndButton = 'select-and-button',
-  hidden = 'hidden'
+  hidden = 'hidden',
+  money = 'money'
 }

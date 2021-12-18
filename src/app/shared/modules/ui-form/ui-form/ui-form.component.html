@@ -3,14 +3,17 @@
   <!-- Form Card -->
   <div class="row animated-row mt-3">
     <div class="col-12">
-      <div class="card no-border mat-elevation-z3">        
+      <div class="card no-border mat-elevation-z3">
         <div class="card-body">
           <div class="row">
             <div class="col-12 pb-2">
-              <div class="text-center"><h4>Title</h4><hr></div>
+              <div class="text-center">
+                <h4>{{title}}</h4>
+                <hr>
+              </div>
             </div>
-            <div *ngFor="let item of inputs" [class]="item.col || col">
-              <div *ngIf="item.visible == null || item.visible" [ngSwitch]="item.type">
+            <div *ngFor="let item of inputs; trackBy: trackBy" [class]="item.col || col">
+              <div *ngIf="item.name !== undefined" [ngSwitch]="item.type">
                 <!-- TEXT  -->
                 <div *ngSwitchCase="types.text">
                   <mat-form-field appearance="outline">
@@ -127,6 +130,20 @@
                       </div>
                     </div>
                   </div>
+                </div>
+
+                <!-- MONEY -->
+                <div *ngSwitchCase="types.money">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{ item.label }}</mat-label>
+                    <app-ui-money matInput [formControlName]="item.name" [required]="item.required || true"></app-ui-money>
+
+                    <mat-error *ngIf="formGroup.get(item.name)?.invalid && submitted">
+                      <div *ngIf="formGroup.get(item.name)?.getError('required')">
+                        {{ 'Required' }}
+                      </div>
+                    </mat-error>
+                  </mat-form-field>
                 </div>
 
                 <!-- TEXTAREA -->

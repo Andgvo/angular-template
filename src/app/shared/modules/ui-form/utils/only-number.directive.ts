@@ -25,7 +25,7 @@ export class OnlyNumberDirective {
   }
 
   @HostListener('keydown', ['$event'])
-  onKeyDown(e: KeyboardEvent) {    
+  onKeyDown(e: KeyboardEvent) {
     if (
       this.navigationKeys.indexOf(e.key) > -1 || // Allow: navigation keys: backspace, delete, arrows etc.
       (e.key === 'a' && e.ctrlKey === true) || // Allow: Ctrl+A
@@ -50,14 +50,6 @@ export class OnlyNumberDirective {
       e.preventDefault();
       e.stopPropagation();
     }
-    // Ensure that it is a number and stop the keypress
-    // if (
-    //   (e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) &&
-    //   (e.keyCode < 96 || e.keyCode > 105)
-    // ) {
-    //     console.log("true");
-    //     e.preventDefault();
-    // }
   }
 
   @HostListener('paste', ['$event'])

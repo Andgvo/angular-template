@@ -1,6 +1,12 @@
-import {AbstractControl} from '@angular/forms';
-import {UIInputType} from './input-type';
-import {UIOptionItem} from './ui-option-item';
+import { AbstractControl } from '@angular/forms';
+import { UIInputType } from './input-type';
+import { UIOptionItem } from './ui-option-item';
+
+/**
+ * @description
+ * Object with properties type UIFormItem
+ */
+export type UIFormItemType = Record<string, UIFormItem>;
 
 /**
  * @description
@@ -14,7 +20,7 @@ export interface UIFormItem {
   /**
    * Name of item inside the FormGroup
    */
-  name: string;
+  name?: string;
   /**
    * Can choose text, number, select, checkbox, radio button
    * or text area

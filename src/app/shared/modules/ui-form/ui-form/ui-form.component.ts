@@ -2,10 +2,11 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { fadeInDown } from '@shared/animations/animations';
 import { UIInputType } from '../models/input-type';
-import { UIFormItem } from '../models/ui-form-item';
+import { UIFormItem, UIFormItemType } from '../models/ui-form-item';
 
 declare type ValueType = number | string | boolean;
 declare type ObjetInput = Record<string, ValueType | ValueType[]>;
+
 @Component({
   selector: 'app-ui-form',
   templateUrl: './ui-form.component.html',
@@ -15,44 +16,54 @@ declare type ObjetInput = Record<string, ValueType | ValueType[]>;
 export class UIFormComponent implements OnChanges {
 
   @Input() title = '';
-  @Input() inputs: UIFormItem[] = [];
-  @Input() object: ObjetInput | undefined = undefined;
+  @Input() items: UIFormItemType | undefined;
+  @Input() object: ObjetInput | undefined;
   @Input() col: string = 'col-12 col-sm-6 col-md-4';
   @Input() validators: ValidatorFn | ValidatorFn[] = [];
   @Input() showSubmit = true;
   @Input() submitLabel = 'Accept';
   @Input() showCancel = true;
-  @Input() cancelLabel = 'Cancel'; 
+  @Input() cancelLabel = 'Cancel';
   @Input() submitted = false;
   @Input() loading = false;
   @Output() onSubmit = new EventEmitter<FormGroup>();
   @Output() onCancel = new EventEmitter<boolean>();
+  public inputs: UIFormItem[] = [];
+  public hola: UIFormItemType | undefined;
 
   formGroup: FormGroup = new FormGroup({});
   types = UIInputType;
 
   constructor() {
+    this.hola = {
+      hola: {
+        name: '',
+        type: UIInputType.file,
+        label: ''
+      }
+    };
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.inputs) {
-      const inputs: UIFormItem[] = changes?.inputs.currentValue;
+    if (changes.items && this.items !== undefined) {
       this.formGroup = new FormGroup({});
-      inputs.forEach(input => {
+      this.inputs = Object.entries(this.items).map(([key, input]) => {
+        input.name = key;
         const control = new FormControl(
           { value: input.value ?? '', disabled: input.disabled ?? false }, this.addValidators(input));
         input.control = control;
         if (input.onChanges) {
           control.valueChanges.subscribe(input.onChanges);
         }
-        this.formGroup.addControl(input.name, control);
+        this.formGroup.addControl(key, control);
+        return input;
       });
       this.formGroup.setValidators(this.validators);
     }
     if (changes.object && this.object != undefined) {
       if (this.inputs.length !== 0) {
         this.inputs.forEach(input => {
-          if (this.object !== undefined && this.object[input.name] !== null) {
+          if (this.object !== undefined && input.name && this.object[input.name] !== null) {
             this.formGroup.get(input.name)?.setValue(this.object[input.name]);
           }
         });
@@ -80,6 +91,9 @@ export class UIFormComponent implements OnChanges {
     }
   }
 
+  trackBy(index:number, item: UIFormItem) {
+    return item.name ?? '';
+  }
   /**
    * This functions add all validators defined on item
    *

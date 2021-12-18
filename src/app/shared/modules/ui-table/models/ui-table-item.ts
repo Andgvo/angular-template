@@ -1,7 +1,7 @@
 /**
  * Property type
  */
-export type UIFormItemType = 'property' | 'array' | 'object';
+export type UITableItemType = 'property' | 'array' | 'object';
 
 export interface UITableItem {
     /**
@@ -15,5 +15,5 @@ export interface UITableItem {
     /**
      * Property type
      */
-    type?: UIFormItemType;
+    type?: UITableItemType;
 }

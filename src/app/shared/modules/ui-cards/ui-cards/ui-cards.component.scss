@@ -4,6 +4,8 @@
     margin: 0px !important;
 }
 .card {
+    min-width: 200px;
+    max-width: 280px;
     cursor: pointer;
     border-radius: 40px !important;
 
@@ -40,5 +42,5 @@ span .mat-icon {
 }
 
 hr {
-    border-top: 3px solid rgba($primary, 0.8) !important;
+    border-top: 2px solid $primary !important;
 }

@@ -8,10 +8,10 @@
           <div class="row">
             <div class="col-12 pb-2">
               <div class="text-center">
-                <h4>{{title}}</h4>
+                <h5>{{title}}</h5>
                 <hr>
               </div>
-            </div>
+            </div>            
             <div *ngFor="let item of inputs; trackBy: trackBy" [class]="item.col || col">
               <div *ngIf="item.name !== undefined" [ngSwitch]="item.type">
                 <!-- TEXT  -->
@@ -21,7 +21,7 @@
                     <input matInput class="form-control" [formControlName]="item.name" [maxlength]="item.maxLength!"
                       [minlength]="item.minLength!" [required]="item.required || true" [type]="item.type">
                     <mat-error *ngIf="formGroup.get(item.name)?.getError('required')">
-                      {{ 'Required' }}
+                      {{ 'Required ' }}
                     </mat-error>
                     <mat-error *ngIf="formGroup.get(item.name)?.getError('pattern')">
                       {{ item.regexErrorMsg }}

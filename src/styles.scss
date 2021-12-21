@@ -93,8 +93,10 @@ $dark: palette.$dark;
 html, body { height: 100%; }
 body { margin: 0; }
 
+h5 { font-size: 1.1rem !important; }
+h6 { font-size: 1rem !important; }
+
 .container {
-  padding-top: 60px;
   padding-bottom: 2rem;
   width: inherit;
 }

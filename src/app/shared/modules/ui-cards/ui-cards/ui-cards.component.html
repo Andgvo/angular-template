@@ -1,5 +1,5 @@
 <div *ngIf="cards !== undefined" class="row" [@cardAnimation]="cards.length">
-    <div *ngFor="let card of cards; trackBy: trackById" class="col-12 col-sm-4 col-md-3 py-2">
+    <div *ngFor="let card of cards; trackBy: trackById" class="col-12 col-sm-4 col-md-3 col-lg-3 py-2">
         <div class="card no-border card-hover mat-elevation-z3 pt-2 pb-4 px-4" matRipple (click)="gotoSeccion(card.url)" matRipple>
             <!-- [matBadge]="1" matBadgePosition="before" matBadgeColor="accent"  [matBadgeHidden]="card.badge"> -->
             <!-- <div class="example-loading-shade" *ngIf="card.disabled">

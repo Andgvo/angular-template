@@ -32,7 +32,7 @@ export class ExampleFormComponent implements OnInit {
     birthday: { label: 'Birthday', type: UIInputType.date },
     startTime: { label: 'Star time', type: UIInputType.time },
     switch: { label: 'Switch', type: UIInputType.switch, value: false },
-    description: { label: 'Description', type: UIInputType.textarea },
+    description: { label: 'Description', type: UIInputType.textarea, col: 'col-12 col-md-8' },
     radio: { label: 'Radio button', type: UIInputType.radioButton, optionItems: this.optionItems },
     checkbox: { label: 'Checkbox', type: UIInputType.checkbox, optionItems: this.optionItems },
   };

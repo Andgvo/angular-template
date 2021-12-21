@@ -20,20 +20,18 @@
                     <mat-label>{{ item.label }}</mat-label>
                     <input matInput class="form-control" [formControlName]="item.name" [maxlength]="item.maxLength!"
                       [minlength]="item.minLength!" [required]="item.required || true" [type]="item.type">
-                    <mat-error *ngIf="formGroup.get(item.name)?.invalid && submitted">
-                      <div *ngIf="formGroup.get(item.name)?.getError('required')">
-                        {{ 'Required' }}
-                      </div>
-                      <div *ngIf="formGroup.get(item.name)?.getError('pattern')">
-                        {{ item.regexErrorMsg }}
-                      </div>
-                      <div *ngIf="formGroup.get(item.name)?.getError('minlength')">
-                        {{ 'El mínimo de caracteres es de ' + item.minLength }}
-                      </div>
-                      <div
-                        *ngIf="item.customValidatorName != null && formGroup.get(item.name)?.getError(item.customValidatorName!)">
-                        {{ item.customValidatorMsg! }}
-                      </div>
+                    <mat-error *ngIf="formGroup.get(item.name)?.getError('required')">
+                      {{ 'Required' }}
+                    </mat-error>
+                    <mat-error *ngIf="formGroup.get(item.name)?.getError('pattern')">
+                      {{ item.regexErrorMsg }}
+                    </mat-error>
+                    <mat-error *ngIf="formGroup.get(item.name)?.getError('minlength')">
+                      {{ 'El mínimo de caracteres es de ' + item.minLength }}
+                    </mat-error>
+                    <mat-error
+                      *ngIf="item.customValidatorName != null && formGroup.get(item.name)?.getError(item.customValidatorName!)">
+                      {{ item.customValidatorMsg! }}
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -136,12 +134,10 @@
                 <div *ngSwitchCase="types.money">
                   <mat-form-field appearance="outline">
                     <mat-label>{{ item.label }}</mat-label>
-                    <app-ui-money matInput [formControlName]="item.name" [required]="item.required || true"></app-ui-money>
-
-                    <mat-error *ngIf="formGroup.get(item.name)?.invalid && submitted">
-                      <div *ngIf="formGroup.get(item.name)?.getError('required')">
-                        {{ 'Required' }}
-                      </div>
+                    <input matInput [formControlName]="item.name" appMoney [required]="item.required || true">
+                    <mat-icon matPrefix>attach_money</mat-icon>
+                    <mat-error *ngIf="formGroup.get(item.name)?.getError('required')">
+                      {{ 'Required' }}
                     </mat-error>
                   </mat-form-field>
                 </div>

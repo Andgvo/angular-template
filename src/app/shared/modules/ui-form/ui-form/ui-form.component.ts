@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms'
 import { fadeInDown } from '@shared/animations/animations';
 import { UIInputType } from '../models/input-type';
 import { UIFormItem, UIFormItemType } from '../models/ui-form-item';
+import { UIFormLables, UIFormService } from '../service/ui-form.service';
 
 declare type ValueType = number | string | boolean;
 declare type ObjetInput = Record<string, ValueType | ValueType[]>;
@@ -28,20 +29,16 @@ export class UIFormComponent implements OnChanges {
   @Input() loading = false;
   @Output() onSubmit = new EventEmitter<FormGroup>();
   @Output() onCancel = new EventEmitter<boolean>();
+  public labels: UIFormLables;
   public inputs: UIFormItem[] = [];
   public hola: UIFormItemType | undefined;
 
   formGroup: FormGroup = new FormGroup({});
   types = UIInputType;
 
-  constructor() {
-    this.hola = {
-      hola: {
-        name: '',
-        type: UIInputType.file,
-        label: ''
-      }
-    };
+  constructor(private uiFormService: UIFormService) {
+    this.labels = uiFormService.config.label ?? {};
+    console.log(this.uiFormService.config);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

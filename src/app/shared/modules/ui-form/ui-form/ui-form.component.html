@@ -11,7 +11,7 @@
                 <h5>{{title}}</h5>
                 <hr>
               </div>
-            </div>            
+            </div>
             <div *ngFor="let item of inputs; trackBy: trackBy" [class]="item.col || col">
               <div *ngIf="item.name !== undefined" [ngSwitch]="item.type">
                 <!-- TEXT  -->
@@ -21,7 +21,7 @@
                     <input matInput class="form-control" [formControlName]="item.name" [maxlength]="item.maxLength!"
                       [minlength]="item.minLength!" [required]="item.required || true" [type]="item.type">
                     <mat-error *ngIf="formGroup.get(item.name)?.getError('required')">
-                      {{ 'Required ' }}
+                      {{ labels.required }}
                     </mat-error>
                     <mat-error *ngIf="formGroup.get(item.name)?.getError('pattern')">
                       {{ item.regexErrorMsg }}
@@ -44,7 +44,7 @@
                       appOnlynumber>
                     <mat-error *ngIf="formGroup.get(item.name)?.invalid && submitted">
                       <div *ngIf="formGroup.get(item.name)?.getError('required')">
-                        {{ 'Required' }}
+                        {{ labels.required }}
                       </div>
                       <div *ngIf="formGroup.get(item.name)?.getError('pattern')">
                         {{ item.regexErrorMsg! }}
@@ -65,7 +65,7 @@
                       appOnlynumber>
                     <mat-error *ngIf="formGroup.get(item.name)?.invalid && submitted">
                       <div *ngIf="formGroup.get(item.name)?.getError('required')">
-                        {{ 'Required' }}
+                        {{ labels.required }}
                       </div>
                     </mat-error>
                   </mat-form-field>
@@ -84,7 +84,7 @@
                     </mat-select>
                     <mat-error *ngIf="formGroup.get(item.name)?.invalid && submitted">
                       <div *ngIf="formGroup.get(item.name)?.getError('required')">
-                        {{ 'messages.MSG1_INPUT' }}
+                        {{ labels.required }}
                       </div>
                     </mat-error>
                   </mat-form-field>
@@ -102,7 +102,7 @@
                     <div *ngIf="formGroup.get(item.name)?.invalid && submitted" @fadeInDown>
                       <div *ngIf="formGroup.get(item.name)?.getError('required')"
                         class="mat-caption mat-error error-option">
-                        Required
+                        {{ labels.required }}
                       </div>
                     </div>
                   </div>
@@ -124,7 +124,7 @@
                     <div *ngIf="formGroup.get(item.name)?.invalid && submitted && submitted" @fadeInDown>
                       <div *ngIf="formGroup.get(item.name)?.getError('required')"
                         class="mat-caption mat-error error-option">
-                        Required
+                        {{ labels.required }}
                       </div>
                     </div>
                   </div>
@@ -137,7 +137,7 @@
                     <input matInput [formControlName]="item.name" appMoney [required]="item.required || true">
                     <mat-icon matPrefix>attach_money</mat-icon>
                     <mat-error *ngIf="formGroup.get(item.name)?.getError('required')">
-                      {{ 'Required' }}
+                      {{ labels.required }}
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -150,7 +150,7 @@
                       [rows]="item.rows ? item.rows : 3" class="form-control"></textarea>
                     <mat-error *ngIf="formGroup.get(item.name)?.invalid && submitted">
                       <div *ngIf="formGroup.get(item.name)?.getError('required')">
-                        Required
+                        {{ labels.required }}
                       </div>
                       <div *ngIf="formGroup.get(item.name)?.getError('maxlength')">
                         {{ 'messages.MSG092' }}
@@ -165,11 +165,6 @@
                   <mat-slide-toggle [formControlName]="item.name" class="pt-1" color="primary">
                     {{ (formGroup.get(item.name)!.value ? 'Yes' : 'No') }}
                   </mat-slide-toggle>
-                  <div *ngIf="formGroup.get(item.name)?.invalid && submitted" class="alert alert-danger">
-                    <div *ngIf="formGroup.get(item.name)?.getError('required')">
-                      {{ 'messages.MSG1_INPUT' }}
-                    </div>
-                  </div>
                 </div>
 
                 <!-- DATE -->
@@ -179,7 +174,7 @@
                     <input matInput type="date" [formControlName]="item.name" [required]="item.required || true">
                     <mat-error *ngIf="formGroup.get(item.name)?.invalid && submitted">
                       <div *ngIf="formGroup.get(item.name)?.getError('required')">
-                        {{ 'Required' }}
+                        {{ labels.required }}
                       </div>
                       <div *ngIf="formGroup.get(item.name)?.getError('pattern')">
                         {{ item.regexErrorMsg! }}
@@ -202,7 +197,7 @@
                     <input matInput type="time" [formControlName]="item.name" [required]="item.required || true">
                     <mat-error *ngIf="formGroup.get(item.name)?.invalid && submitted">
                       <div *ngIf="formGroup.get(item.name)?.getError('required')">
-                        {{ 'Required' }}
+                        {{ labels.required }}
                       </div>
                       <div *ngIf="formGroup.get(item.name)?.getError('pattern')">
                         {{ item.regexErrorMsg! }}

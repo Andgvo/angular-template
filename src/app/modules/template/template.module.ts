@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { UIFormModule } from '@shared/modules/ui-form/ui-form.module';
-import { UiTableModule } from '@shared/modules/ui-table/ui-table.module';
+import { UITableModule } from '@shared/modules/ui-table/ui-table.module';
 import { BreadcrumbModule } from 'src/app/shared/modules/breadcrumb/breadcrumb.module';
 import { UIContextModule } from 'src/app/shared/modules/ui-context/ui-context.module';
 import { ExampleBreadcrumbComponent } from './example-breadcrumb/example-breadcrumb.component';
@@ -27,7 +27,7 @@ import { TemplateRoutingModule } from './template-routing.module';
     BreadcrumbModule,
     UIContextModule,
     UIFormModule,
-    UiTableModule
+    UITableModule
   ]
 })
 export class TemplateModule { }

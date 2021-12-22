@@ -23,4 +23,4 @@ import { MatIconModule } from '@angular/material/icon';
   ],
   exports: [UITableComponent]
 })
-export class UiTableModule { }
+export class UITableModule { }

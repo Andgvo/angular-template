@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { UIFormModule } from '@shared/modules/ui-form/ui-form.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
     MatListModule,
     MatToolbarModule,
     MatMenuModule,
+    UIFormModule.forRoot({ label: { required: 'Required label edited by forRoot' } }),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -51,7 +51,7 @@ export class ExampleTableComponent implements OnInit {
     { name: 'position', label: 'Position' },
     { name: 'weight', label: 'Weight' },
     { name: 'symbol', label: 'Symbol' },
-    { name: 'actions', label: 'Actions'}//, default: false}
+    //{ name: 'actions', label: 'Actions'}//, default: false}
   ];
 
   public data: PeriodicElement[];

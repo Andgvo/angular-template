@@ -46,6 +46,14 @@ export class ExampleTableComponent implements OnInit {
     { name: 'weight', label: 'Weight' },
     { name: 'symbol', label: 'Symbol' }
   ];
+  public itemsWithActions: UITableItem[] = [
+    { name: 'name', label: 'Name' },
+    { name: 'position', label: 'Position' },
+    { name: 'weight', label: 'Weight' },
+    { name: 'symbol', label: 'Symbol' },
+    { name: 'actions', label: 'Actions'}//, default: false}
+  ];
+
   public data: PeriodicElement[];
   
   constructor() {

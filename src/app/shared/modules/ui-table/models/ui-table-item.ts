@@ -16,4 +16,8 @@ export interface UITableItem {
      * Property type
      */
     type?: UITableItemType;
+    /**
+     * If default is false you need to define in html the column
+     */
+    default?: boolean;
 }

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
 import { UIFormModule } from '@shared/modules/ui-form/ui-form.module';
 import { UITableModule } from '@shared/modules/ui-table/ui-table.module';
 import { BreadcrumbModule } from 'src/app/shared/modules/breadcrumb/breadcrumb.module';
@@ -27,7 +28,8 @@ import { TemplateRoutingModule } from './template-routing.module';
     BreadcrumbModule,
     UIContextModule,
     UIFormModule,
-    UITableModule
+    UITableModule,
+    MatTableModule
   ]
 })
 export class TemplateModule { }

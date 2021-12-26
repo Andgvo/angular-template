@@ -30,8 +30,7 @@ export class UIFormComponent implements OnChanges {
   @Output() onSubmit = new EventEmitter<FormGroup>();
   @Output() onCancel = new EventEmitter<boolean>();
   public labels: UIFormLables;
-  public inputs: UIFormItem[] = [];
-  public hola: UIFormItemType | undefined;
+  public inputs: UIFormItem[] = []; 
 
   formGroup: FormGroup = new FormGroup({});
   types = UIInputType;

@@ -1,13 +1,23 @@
 <div class="container">
     <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
-    <div class="row">
-        <div class="col">
-            <p>You can configure default color in src/assets/sass/palette.scss</p>
-        </div>
-    </div>
     <div class="row animated-row my-4">
-        <div class="col">
-            <app-ui-table [items]="items" [data]="data"></app-ui-table>
+        <div class="col-12 pb-3">
+            <!-- <app-ui-table [items]="items" [data]="data"></app-ui-table> -->
+        </div>
+        <div class="col-12">
+            <app-ui-table [items]="itemsWithActions" [data]="data">
+                <!-- Extra column for actions -->                
+                <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef class="justify-content-center">
+                        {{'Actions'}}
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let element" class="justify-content-center">
+                        <button class="btn btn-circle btn-outline">
+                            <em class="fa fa-pencil"></em>
+                        </button>
+                    </mat-cell>
+                </ng-container>
+            </app-ui-table>
         </div>
     </div>
 </div>

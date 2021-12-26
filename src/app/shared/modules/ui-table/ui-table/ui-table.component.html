@@ -16,7 +16,7 @@
         <!-- Custom cotent -->
         <ng-content></ng-content>
         <!-- Default columns -->
-        <ng-container *ngFor="let item of items" [matColumnDef]="item.name">
+        <ng-container *ngFor="let item of  columns" [matColumnDef]="item.name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> {{item.label}} </th>
             <td mat-cell *matCellDef="let element"> {{ element[item.name] }} </td>
         </ng-container>

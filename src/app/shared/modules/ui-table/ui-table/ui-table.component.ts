@@ -24,6 +24,7 @@ export class UITableComponent<T> implements OnChanges, AfterViewInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | null = null;
   @ViewChild(MatSort, { static: true }) sort: MatSort | null = null;
  
+  columns: UITableItem[] = [];
   public displayedColumns: string[] = [];
   public dataSource = new MatTableDataSource<T>();
 
@@ -31,7 +32,8 @@ export class UITableComponent<T> implements OnChanges, AfterViewInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.items && this.items !== null) {
-      this.displayedColumns = this.items.map(item => item.name);
+      this.columns = this.items.filter(item => item.default !== false );
+      this.displayedColumns = this.items.filter(item => item.default !== false ).map(item => item.name);
     }
     if (changes.data && this.data !== null) {
       this.dataSource.data = this.data;
@@ -41,6 +43,7 @@ export class UITableComponent<T> implements OnChanges, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    //this.displayedColumns.push('actions');
   }
 
   search(filterValue: string) {

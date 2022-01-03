@@ -61,9 +61,10 @@ export class ExampleFormComponent implements OnInit {
     lastname: 'Lopez',
     disabled: 'Other name',
     age: 24,
+    money: 1000000,
     phone: '5512345678',
     gender: 2,
-    birthday: "0123-03-12",
+    birthday: '2021-12-31T23:20:02.141Z',
     checkbox: [2],
     description: "12313",
     radio: 1,
@@ -78,7 +79,7 @@ export class ExampleFormComponent implements OnInit {
 
   onSubmit(form: FormGroup) {
     if (form.valid) {
-      console.log(form.value);
+      console.log(form.value);      
     } else {
       console.error('Not valid form');
     }

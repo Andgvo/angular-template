@@ -1,3 +1,4 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
 import { UITableItem } from '@shared/modules/ui-table/models/ui-table-item';
 import { ROUTE_TABLE } from '@shared/routing/AppsRoute';
@@ -51,11 +52,11 @@ export class ExampleTableComponent implements OnInit {
     { name: 'position', label: 'Position' },
     { name: 'weight', label: 'Weight' },
     { name: 'symbol', label: 'Symbol' },
-    { name: 'actions', label: 'Actions', default: false}
+    { name: 'actions', label: 'Actions', default: false }
   ];
-
   public data: PeriodicElement[];
-  
+  public selection = new SelectionModel<PeriodicElement>(true, []);
+
   constructor() {
     this.data = ELEMENT_DATA;
   }

@@ -6,13 +6,13 @@
       <div class="card no-border mat-elevation-z3">
         <div class="card-body">
           <div class="row">
-            <div class="col-12 pb-2">
+            <div class="col-12 pt-1">
               <div class="text-center">
                 <h5>{{title}}</h5>
                 <hr>
               </div>
             </div>
-            <div *ngFor="let item of inputs; trackBy: trackBy" [class]="item.col || col">
+            <div class="pt-3" *ngFor="let item of inputs; trackBy: trackBy" [class]="item.col || col">
               <div *ngIf="item.name !== undefined" [ngSwitch]="item.type">
                 <!-- TEXT  -->
                 <div *ngSwitchCase="types.text">
@@ -171,21 +171,19 @@
                 <div *ngSwitchCase="types.date">
                   <mat-form-field appearance="outline">
                     <mat-label>{{ item.label }}</mat-label>
-                    <input matInput type="date" [formControlName]="item.name" [required]="item.required || true">
-                    <mat-error *ngIf="formGroup.get(item.name)?.invalid && submitted">
-                      <div *ngIf="formGroup.get(item.name)?.getError('required')">
-                        {{ labels.required }}
-                      </div>
-                      <div *ngIf="formGroup.get(item.name)?.getError('pattern')">
-                        {{ item.regexErrorMsg! }}
-                      </div>
-                      <div *ngIf="formGroup.get(item.name)?.getError('secondDateBefore')">
-                        {{ 'messages.MSG10_END_DATE' }}
-                      </div>
-                      <div
-                        *ngIf="item.customValidatorName != null && formGroup.get(item.name)?.getError(item.customValidatorName!)">
-                        {{ item.customValidatorMsg! }}
-                      </div>
+                    <input matInput [matDatepicker]="picker" [formControlName]="item.name"
+                      [required]="item.required || true">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="formGroup.get(item.name)?.getError('required')">
+                      {{ labels.required }}
+                    </mat-error>
+                    <mat-error *ngIf="formGroup.get(item.name)?.getError('pattern')">
+                      {{ item.regexErrorMsg! }}
+                    </mat-error>
+                    <mat-error
+                      *ngIf="item.customValidatorName != null && formGroup.get(item.name)?.getError(item.customValidatorName!)">
+                      {{ item.customValidatorMsg! }}
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -223,11 +221,12 @@
             </div>
           </div>
           <div class="row">
+            <div class="col-12"><pre>{{formGroup.value | json}}</pre></div>
             <!-- CONTAINER -->
             <ng-content></ng-content>
 
             <!-- Buttons -->
-            <div class="row mt-3 justify-content-center">
+            <div class="row mt-0 justify-content-center">
               <div class="col-12 text-end">
                 <button mat-button *ngIf="showCancel" (click)="cancel()" type="button">
                   {{ cancelLabel }}

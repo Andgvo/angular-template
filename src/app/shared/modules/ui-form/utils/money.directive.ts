@@ -37,7 +37,7 @@ interface ICursorPosition {
     'input[formControlName][appMoney], input[formControl][appMoney], input[ngModel][appMoney]',
   providers: [DecimalPipe, CURRENCYDIRECTIVE_VALUE_ACCESSOR, CURRENCYDIRECTIVE_VALIDAT0R]
 })
-export class MoneyDirective implements ControlValueAccessor, Validator, OnInit{
+export class MoneyDirective implements ControlValueAccessor, Validator, OnInit {
 
   @Input() formatOnlyOnBlur = false;
   @Input() min: number | undefined;
@@ -65,8 +65,8 @@ export class MoneyDirective implements ControlValueAccessor, Validator, OnInit{
   private numberWithUpTo2DecimalsRegex = new RegExp(`^([0-9]+)?(\\${this.decimalPointSeparator}[0-9]?[0-9]?)?$`);
   private previousRawInputValue = '';
 
-  private onChange: (value: string) => void = () => {};
-  private onTouch: () => void = () => {};
+  private onChange: (value: string) => void = () => { };
+  private onTouch: () => void = () => { };
 
   constructor(
     private decimalPipe: DecimalPipe,
@@ -146,7 +146,7 @@ export class MoneyDirective implements ControlValueAccessor, Validator, OnInit{
     return originalValue.substr(0, index) + replacement + originalValue.substr(index + replacement.length);
   }
 
-  private isNumberKey(event: KeyboardEvent): boolean | string{
+  private isNumberKey(event: KeyboardEvent): boolean | string {
     return event.key && event.key.length === 1 && !!String(event.key).match(this.numbersAndDecimalPointSeparatorRegex);
   }
 
@@ -250,7 +250,7 @@ export class MoneyDirective implements ControlValueAccessor, Validator, OnInit{
       start: inputEl.selectionStart ?? 0,
       end: inputEl.selectionEnd ?? 0
     };
-   }
+  }
 
   private setCursorPosition(inputEl: HTMLInputElement, position: ICursorPosition) {
     inputEl.setSelectionRange(position.start >= 0 ? position.start : 0, position.end >= 0 ? position.end : 0);
@@ -286,7 +286,6 @@ export class MoneyDirective implements ControlValueAccessor, Validator, OnInit{
   registerOnChange(fn: (value: number | null) => void): void {
     this.onChange = (value: string) => {
       const valueToEmit = value === '' ? null : this.parseLocaleStringToNumber(value);
-      console.log('Emitting value', valueToEmit);
       fn(valueToEmit);
     };
   }
@@ -311,7 +310,7 @@ export class MoneyDirective implements ControlValueAccessor, Validator, OnInit{
     this.previousRawInputValue = this.getNativeInputValue();
   }
 
-  validate(control: AbstractControl): ValidationErrors | null{
+  validate(control: AbstractControl): ValidationErrors | null {
     const errors: ValidationErrors = {};
     if (this.max !== undefined && control.value > this.max) {
       errors.max = true;

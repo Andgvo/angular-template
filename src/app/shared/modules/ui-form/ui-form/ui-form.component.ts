@@ -30,14 +30,13 @@ export class UIFormComponent implements OnChanges {
   @Output() onSubmit = new EventEmitter<FormGroup>();
   @Output() onCancel = new EventEmitter<boolean>();
   public labels: UIFormLables;
-  public inputs: UIFormItem[] = []; 
+  public inputs: UIFormItem[] = [];
 
   formGroup: FormGroup = new FormGroup({});
   types = UIInputType;
 
   constructor(private uiFormService: UIFormService) {
-    this.labels = uiFormService.config.label ?? {};
-    console.log(this.uiFormService.config);
+    this.labels = this.uiFormService.config.label ?? {};
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -87,7 +86,7 @@ export class UIFormComponent implements OnChanges {
     }
   }
 
-  trackBy(index:number, item: UIFormItem) {
+  trackBy(index: number, item: UIFormItem) {
     return item.name ?? '';
   }
   /**

@@ -4,6 +4,9 @@ export declare class UIFormLables {
   required?: string;
   maxLength?: string;
   minLength?: string;
+  maxDate?: string;
+  minDate?: string;
+  dateFormat?: string;
   min?: string;
   max?: string;
   true?: string;
@@ -14,6 +17,7 @@ export declare class UIFormLables {
 
 export declare interface UIFormConfig {
   label?: UIFormLables;
+  locale: string;
 }
 
 export const CONFIG = new InjectionToken<UIFormConfig>('CONFIG');

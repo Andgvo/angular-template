@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { fadeInDown } from '@shared/animations/animations';
 import { UIInputType } from '../models/input-type';
 import { UIFormItem, UIFormItemType } from '../models/ui-form-item';
@@ -12,7 +13,10 @@ declare type ObjetInput = Record<string, ValueType | ValueType[]>;
   selector: 'app-ui-form',
   templateUrl: './ui-form.component.html',
   styleUrls: ['./ui-form.component.scss'],
-  animations: [fadeInDown()]
+  animations: [fadeInDown()],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
+  ]
 })
 export class UIFormComponent implements OnChanges {
 
@@ -35,8 +39,9 @@ export class UIFormComponent implements OnChanges {
   formGroup: FormGroup = new FormGroup({});
   types = UIInputType;
 
-  constructor(private uiFormService: UIFormService) {
+  constructor(private uiFormService: UIFormService, private adapter: DateAdapter<any>) {
     this.labels = this.uiFormService.config.label ?? {};
+    this.adapter.setLocale(uiFormService.config.locale);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

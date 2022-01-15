@@ -50,6 +50,14 @@ export interface UIFormItem {
    */
   maxLength?: number;
   /**
+   * Date type min date value
+   */
+   minDate?: string | Date;
+   /**
+    * Date type max date value
+    */
+   maxDate?: string | Date;
+  /**
    * Select type avalible items to select
    */
   optionItems?: UIOptionItem[];

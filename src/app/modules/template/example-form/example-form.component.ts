@@ -30,6 +30,7 @@ export class ExampleFormComponent implements OnInit {
     phone: { label: 'Phone', type: UIInputType.textNumber },
     gender: { label: 'Gender', type: UIInputType.select, optionItems: this.optionItems },
     birthday: { label: 'Birthday', type: UIInputType.date },
+    date: { label: 'Date Limit now', type: UIInputType.date, minDate: new Date(Date.now()), maxDate: new Date(Date.now() + 1000000000) },
     startTime: { label: 'Star time', type: UIInputType.time },
     switch: { label: 'Switch', type: UIInputType.switch, value: false },
     description: { label: 'Description', type: UIInputType.textarea, col: 'col-12 col-md-8' },
@@ -79,7 +80,7 @@ export class ExampleFormComponent implements OnInit {
 
   onSubmit(form: FormGroup) {
     if (form.valid) {
-      console.log(form.value);      
+      console.log(form.value);
     } else {
       console.error('Not valid form');
     }

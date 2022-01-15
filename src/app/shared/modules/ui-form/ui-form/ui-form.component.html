@@ -23,12 +23,12 @@
                     <mat-error *ngIf="formGroup.get(item.name)?.getError('required')">
                       {{ labels.required }}
                     </mat-error>
+                    <mat-error *ngIf="formGroup.get(item.name)?.getError('minlength')">
+                      {{ labels.minLength }}
+                    </mat-error>
                     <mat-error *ngIf="formGroup.get(item.name)?.getError('pattern')">
                       {{ item.regexErrorMsg }}
-                    </mat-error>
-                    <mat-error *ngIf="formGroup.get(item.name)?.getError('minlength')">
-                      {{ 'El mínimo de caracteres es de ' + item.minLength }}
-                    </mat-error>
+                    </mat-error> 
                     <mat-error
                       *ngIf="item.customValidatorName != null && formGroup.get(item.name)?.getError(item.customValidatorName!)">
                       {{ item.customValidatorMsg! }}
@@ -169,23 +169,8 @@
 
                 <!-- DATE -->
                 <div *ngSwitchCase="types.date">
-                  <mat-form-field appearance="outline">
-                    <mat-label>{{ item.label }}</mat-label>
-                    <input matInput [matDatepicker]="picker" [formControlName]="item.name"
-                      [required]="item.required || true">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                    <mat-error *ngIf="formGroup.get(item.name)?.getError('required')">
-                      {{ labels.required }}
-                    </mat-error>
-                    <mat-error *ngIf="formGroup.get(item.name)?.getError('pattern')">
-                      {{ item.regexErrorMsg! }}
-                    </mat-error>
-                    <mat-error
-                      *ngIf="item.customValidatorName != null && formGroup.get(item.name)?.getError(item.customValidatorName!)">
-                      {{ item.customValidatorMsg! }}
-                    </mat-error>
-                  </mat-form-field>
+                  <ui-date appearance="outline" [label]="item.label" [formControlName]="item.name" [min]="item.minDate"
+                    [max]="item.maxDate" [required]="item.required || true"></ui-date>
                 </div>
 
                 <!-- TIME -->
@@ -221,7 +206,6 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-12"><pre>{{formGroup.value | json}}</pre></div>
             <!-- CONTAINER -->
             <ng-content></ng-content>
 

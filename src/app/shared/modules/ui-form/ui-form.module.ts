@@ -13,6 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CONFIG, UIFormConfig, UIFormService } from './service/ui-form.service';
 import { UICheckboxGroupComponent } from './ui-checkbox-group/ui-checkbox-group.component';
+import { UIDateComponent } from './ui-date/ui-date.component';
 import { UIFormComponent } from './ui-form/ui-form.component';
 import { UIMoneyComponent } from './ui-money/ui-money.component';
 import { MoneyDirective } from './utils/money.directive';
@@ -34,7 +35,10 @@ import { OnlyNumberDirective } from './utils/only-number.directive';
     MatDatepickerModule,
     MatNativeDateModule
   ],
-  declarations: [UIFormComponent, UICheckboxGroupComponent, UIMoneyComponent, OnlyNumberDirective, MoneyDirective],
+  declarations: [
+    UIFormComponent, UICheckboxGroupComponent, UIMoneyComponent, UIDateComponent,
+    OnlyNumberDirective, MoneyDirective
+  ],
   exports: [UIFormComponent, OnlyNumberDirective]
 })
 export class UIFormModule {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { UIInputType } from '@shared/modules/ui-form/models/input-type';
+import { UIInputEnum } from '@shared/modules/ui-form/models/input-type';
 import { UIFormItemType } from '@shared/modules/ui-form/models/ui-form-item';
 import { UIOptionItem } from '@shared/modules/ui-form/models/ui-option-item';
 import { ROUTE_DYNAMIC_FORM } from '@shared/routing/AppsRoute';
@@ -21,21 +21,21 @@ export class ExampleFormComponent implements OnInit {
     { value: 4, label: 'Option 4' },
     { value: 5, label: 'Option 5' }
   ];
-  public inputs: UIFormItemType = {
-    name: { label: 'Name', type: UIInputType.text },
-    lastname: { label: 'Lastname', type: UIInputType.text },
-    disabled: { label: 'Disabled', type: UIInputType.text, disabled: true, required: false, value: 'I was disabled' },
-    money: { label: 'Money', type: UIInputType.money },
-    age: { label: 'Age', type: UIInputType.number },
-    phone: { label: 'Phone', type: UIInputType.textNumber },
-    gender: { label: 'Gender', type: UIInputType.select, optionItems: this.optionItems },
-    birthday: { label: 'Birthday', type: UIInputType.date },
-    date: { label: 'Date Limit now', type: UIInputType.date, minDate: new Date(Date.now()), maxDate: new Date(Date.now() + 1000000000) },
-    startTime: { label: 'Star time', type: UIInputType.time },
-    switch: { label: 'Switch', type: UIInputType.switch, value: false },
-    description: { label: 'Description', type: UIInputType.textarea, col: 'col-12 col-md-8' },
-    radio: { label: 'Radio button', type: UIInputType.radioButton, optionItems: this.optionItems },
-    checkbox: { label: 'Checkbox', type: UIInputType.checkbox, optionItems: this.optionItems },
+  public readonly inputs: UIFormItemType = {
+    name: { label: 'Name', type: 'text' },
+    lastname: { label: 'Lastname', type: 'text' },
+    disabled: { label: 'Disabled', type: 'text', disabled: true, required: false, value: 'I was disabled' },
+    money: { label: 'Money', type: 'money' },
+    age: { label: 'Age', type: 'number' },
+    phone: { label: 'Phone', type: 'textNumber' },
+    gender: { label: 'Gender', type: 'select', optionItems: this.optionItems },
+    birthday: { label: 'Birthday', type: 'date' },
+    date: { label: 'Date Limit now', type: 'date', minDate: new Date(Date.now()), maxDate: new Date(Date.now() + 1000000000) },
+    startTime: { label: 'Star time', type: 'time' },
+    switch: { label: 'Switch', type: 'switch', value: false },
+    description: { label: 'Description', type: UIInputEnum.textarea, col: 'col-12 col-md-8' },
+    radio: { label: 'Radio button', type: UIInputEnum.radioButton, optionItems: this.optionItems },
+    checkbox: { label: 'Checkbox', type: UIInputEnum.checkbox, optionItems: this.optionItems },
   };
   public optionItemsDynamic: UIOptionItem[] = [
     { value: 1, label: 'Option 1' },
@@ -43,18 +43,18 @@ export class ExampleFormComponent implements OnInit {
   ];
   public dynamicInputs: UIFormItemType = {
     show: {
-      label: 'Show', type: UIInputType.select, optionItems: this.optionItemsDynamic,
+      label: 'Show', type: UIInputEnum.select, optionItems: this.optionItemsDynamic,
       onChanges: (value) => this.hideOption(value)
     },
     enable: {
-      label: 'Enable', type: UIInputType.select, optionItems: this.optionItemsDynamic,
+      label: 'Enable', type: UIInputEnum.select, optionItems: this.optionItemsDynamic,
       onChanges: (value) => this.disabledOption(value)
     },
     disabled: {
-      label: 'Disabled', type: UIInputType.text, required: false
+      label: 'Disabled', type: UIInputEnum.text, required: false
     },
     hidden: {
-      label: 'Gender', type: UIInputType.hidden, required: false
+      label: 'Gender', type: UIInputEnum.hidden, required: false
     },
   };
   public exampleObject = {
@@ -66,6 +66,7 @@ export class ExampleFormComponent implements OnInit {
     phone: '5512345678',
     gender: 2,
     birthday: '2021-12-31T23:20:02.141Z',
+    date: new Date(Date.now() + 1000000000).toISOString(),
     checkbox: [2],
     description: "12313",
     radio: 1,
@@ -88,9 +89,9 @@ export class ExampleFormComponent implements OnInit {
 
   hideOption(value: number) {
     if (value === 1) {
-      this.dynamicInputs.hidden.type = UIInputType.text
+      this.dynamicInputs.hidden.type = UIInputEnum.text
     } else if (value === 2) {
-      this.dynamicInputs['hidden'].type = UIInputType.hidden
+      this.dynamicInputs['hidden'].type = UIInputEnum.hidden
     }
   }
 

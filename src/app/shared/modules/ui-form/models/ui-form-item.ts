@@ -1,5 +1,5 @@
 import { AbstractControl } from '@angular/forms';
-import { UIInputType } from './input-type';
+import { UIInputEnum, UIInputType } from './input-type';
 import { UIOptionItem } from './ui-option-item';
 
 /**
@@ -25,12 +25,15 @@ export interface UIFormItem {
    * Can choose text, number, select, checkbox, radio button
    * or text area
    */
-  type: UIInputType;
+  type: UIInputType | UIInputEnum;
   /**
    * Label of Form Item, you can use a json value of transalate.
    * Ex.
    */
   label: string;
+  /**
+   * Required control. Default: true.
+   */
   required?: boolean;
   regex?: string;
   /**

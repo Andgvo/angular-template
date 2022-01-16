@@ -14,16 +14,16 @@ import { UIFormLables, UIFormService } from "../service/ui-form.service";
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         <mat-error *ngIf="control.getError('required')">
-            {{ labels.required }}
+            {{ labels.error?.required }}
         </mat-error>
         <mat-error *ngIf="control.getError('matDatepickerMin')">
-            {{ labels.minDate ?? 'Error min date' }}
+            {{ labels.error?.minDate ?? 'Error min date' }}
         </mat-error>
         <mat-error *ngIf="control.getError('matDatepickerMax')">
-            {{ labels.maxDate ?? 'Error max date' }}
+            {{ labels.error?.maxDate ?? 'Error max date' }}
         </mat-error>
         <!-- <mat-error *ngIf="control.getError('matDatepickerParse')">
-            {{ labels.dateFormat ?? 'Error date format' }}
+            {{ labels.error.dateFormat ?? 'Error date format' }}
         </mat-error> -->
     </mat-form-field>
     `,

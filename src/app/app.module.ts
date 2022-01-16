@@ -26,7 +26,7 @@ import { UIFormModule } from '@shared/modules/ui-form/ui-form.module';
     MatListModule,
     MatToolbarModule,
     MatMenuModule,
-    UIFormModule.forRoot({ locale: 'es', label: { required: 'Required label edited by forRoot' } }),
+    UIFormModule.forRoot({ locale: 'es', label: { error: { required: 'Required label edited by forRoot' } } }),
   ],
   providers: [],
   bootstrap: [AppComponent]

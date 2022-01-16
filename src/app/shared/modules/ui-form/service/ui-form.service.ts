@@ -1,14 +1,16 @@
 import { Inject, Injectable, InjectionToken } from '@angular/core';
 
 export declare class UIFormLables {
-  required?: string;
-  maxLength?: string;
-  minLength?: string;
-  maxDate?: string;
-  minDate?: string;
-  dateFormat?: string;
-  min?: string;
-  max?: string;
+  error?: {
+    required?: string;
+    maxLength?: string;
+    minLength?: string;
+    maxDate?: string;
+    minDate?: string;
+    dateFormat?: string;
+    min?: string;
+    max?: string;
+  }
   true?: string;
   false?: string;
   ok?: string;

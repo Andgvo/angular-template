@@ -19,12 +19,12 @@
                   <mat-form-field appearance="outline">
                     <mat-label>{{ item.label }}</mat-label>
                     <input matInput class="form-control" [formControlName]="item.name" [maxlength]="item.maxLength!"
-                      [minlength]="item.minLength!" [required]="item.required || true" [type]="item.type">
+                      [minlength]="item.minLength!" [required]="item.required || true" type="text">
                     <mat-error *ngIf="formGroup.get(item.name)?.getError('required')">
-                      {{ labels.required }}
+                      {{ labels.error?.required }}
                     </mat-error>
                     <mat-error *ngIf="formGroup.get(item.name)?.getError('minlength')">
-                      {{ labels.minLength }}
+                      {{ labels.error?.minLength }}
                     </mat-error>
                     <mat-error *ngIf="formGroup.get(item.name)?.getError('pattern')">
                       {{ item.regexErrorMsg }}
@@ -44,7 +44,7 @@
                       appOnlynumber>
                     <mat-error *ngIf="formGroup.get(item.name)?.invalid && submitted">
                       <div *ngIf="formGroup.get(item.name)?.getError('required')">
-                        {{ labels.required }}
+                        {{ labels.error?.required }}
                       </div>
                       <div *ngIf="formGroup.get(item.name)?.getError('pattern')">
                         {{ item.regexErrorMsg! }}
@@ -65,7 +65,7 @@
                       appOnlynumber>
                     <mat-error *ngIf="formGroup.get(item.name)?.invalid && submitted">
                       <div *ngIf="formGroup.get(item.name)?.getError('required')">
-                        {{ labels.required }}
+                        {{ labels.error?.required }}
                       </div>
                     </mat-error>
                   </mat-form-field>
@@ -84,7 +84,7 @@
                     </mat-select>
                     <mat-error *ngIf="formGroup.get(item.name)?.invalid && submitted">
                       <div *ngIf="formGroup.get(item.name)?.getError('required')">
-                        {{ labels.required }}
+                        {{ labels.error?.required }}
                       </div>
                     </mat-error>
                   </mat-form-field>
@@ -102,7 +102,7 @@
                     <div *ngIf="formGroup.get(item.name)?.invalid && submitted" @fadeInDown>
                       <div *ngIf="formGroup.get(item.name)?.getError('required')"
                         class="mat-caption mat-error error-option">
-                        {{ labels.required }}
+                        {{ labels.error?.required }}
                       </div>
                     </div>
                   </div>
@@ -124,7 +124,7 @@
                     <div *ngIf="formGroup.get(item.name)?.invalid && submitted && submitted" @fadeInDown>
                       <div *ngIf="formGroup.get(item.name)?.getError('required')"
                         class="mat-caption mat-error error-option">
-                        {{ labels.required }}
+                        {{ labels.error?.required }}
                       </div>
                     </div>
                   </div>
@@ -137,7 +137,7 @@
                     <input matInput [formControlName]="item.name" appMoney [required]="item.required || true">
                     <mat-icon matPrefix>attach_money</mat-icon>
                     <mat-error *ngIf="formGroup.get(item.name)?.getError('required')">
-                      {{ labels.required }}
+                      {{ labels.error?.required }}
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -150,7 +150,7 @@
                       [rows]="item.rows ? item.rows : 3" class="form-control"></textarea>
                     <mat-error *ngIf="formGroup.get(item.name)?.invalid && submitted">
                       <div *ngIf="formGroup.get(item.name)?.getError('required')">
-                        {{ labels.required }}
+                        {{ labels.error?.required }}
                       </div>
                       <div *ngIf="formGroup.get(item.name)?.getError('maxlength')">
                         {{ 'messages.MSG092' }}
@@ -180,7 +180,7 @@
                     <input matInput type="time" [formControlName]="item.name" [required]="item.required || true">
                     <mat-error *ngIf="formGroup.get(item.name)?.invalid && submitted">
                       <div *ngIf="formGroup.get(item.name)?.getError('required')">
-                        {{ labels.required }}
+                        {{ labels.error?.required }}
                       </div>
                       <div *ngIf="formGroup.get(item.name)?.getError('pattern')">
                         {{ item.regexErrorMsg! }}

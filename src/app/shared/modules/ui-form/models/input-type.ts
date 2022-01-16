@@ -1,10 +1,10 @@
-export enum UIInputType {
+export enum UIInputEnum {
   text = 'text',
-  textNumber = 'text-number',
+  textNumber = 'textNumber',
   number = 'number',
   select = 'select',
   checkbox = 'checkbox',
-  radioButton = 'radio-button',
+  radioButton = 'radioButton',
   textarea = 'textarea',
   date = 'date',
   time = 'time',
@@ -13,3 +13,5 @@ export enum UIInputType {
   hidden = 'hidden',
   money = 'money'
 }
+
+export type UIInputType = keyof typeof UIInputEnum;

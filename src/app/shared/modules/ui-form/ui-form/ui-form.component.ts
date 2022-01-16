@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { fadeInDown } from '@shared/animations/animations';
-import { UIInputType } from '../models/input-type';
+import { UIInputEnum } from '../models/input-type';
 import { UIFormItem, UIFormItemType } from '../models/ui-form-item';
 import { UIFormLables, UIFormService } from '../service/ui-form.service';
 
@@ -37,7 +37,7 @@ export class UIFormComponent implements OnChanges {
   public inputs: UIFormItem[] = [];
 
   formGroup: FormGroup = new FormGroup({});
-  types = UIInputType;
+  types = UIInputEnum;
 
   constructor(private uiFormService: UIFormService, private adapter: DateAdapter<any>) {
     this.labels = this.uiFormService.config.label ?? {};

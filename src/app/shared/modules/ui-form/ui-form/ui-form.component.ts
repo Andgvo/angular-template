@@ -23,7 +23,7 @@ export class UIFormComponent implements OnChanges {
   @Input() title = '';
   @Input() items: UIFormItemType | undefined;
   @Input() object: ObjetInput | undefined;
-  @Input() col: string = 'col-12 col-sm-6 col-md-4';
+  @Input() col: string = 'col-span-1';
   @Input() validators: ValidatorFn | ValidatorFn[] = [];
   @Input() showSubmit = true;
   @Input() submitLabel = 'Accept';

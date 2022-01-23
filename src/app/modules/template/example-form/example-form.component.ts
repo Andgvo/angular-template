@@ -18,13 +18,13 @@ export class ExampleFormComponent implements OnInit {
     { value: 1, label: 'Option 1' },
     { value: 2, label: 'Option 2' },
     { value: 3, label: 'Option 3' },
-    { value: 4, label: 'Option 4' },
-    { value: 5, label: 'Option 5' }
+    { value: 4, label: 'Option 4. This is a large option to force breackpoints' },
+    { value: 5, label: 'Option 5. Lorem ipsum dolor sit amet consectetur adipisicing elit.'}
   ];
   public readonly inputs: UIFormItemType = {
     name: { label: 'Name', type: 'text' },
     lastname: { label: 'Lastname', type: 'text' },
-    disabled: { label: 'Disabled', type: 'text', disabled: true, required: false, value: 'I was disabled' },
+    disabled: { label: 'Disabled', type: 'text', disabled: true, value: 'I was disabled' },
     money: { label: 'Money', type: 'money' },
     age: { label: 'Age', type: 'number' },
     phone: { label: 'Phone', type: 'textNumber' },
@@ -33,7 +33,7 @@ export class ExampleFormComponent implements OnInit {
     date: { label: 'Date Limit now', type: 'date', minDate: new Date(Date.now()), maxDate: new Date(Date.now() + 1000000000) },
     startTime: { label: 'Star time', type: 'time' },
     switch: { label: 'Switch', type: 'switch', value: false },
-    description: { label: 'Description', type: UIInputEnum.textarea, col: 'col-12 col-md-8' },
+    description: { label: 'Description', type: UIInputEnum.textarea, col: 'col-span-1 sm:col-span-2', required: true },
     radio: { label: 'Radio button', type: UIInputEnum.radioButton, optionItems: this.optionItems },
     checkbox: { label: 'Checkbox', type: UIInputEnum.checkbox, optionItems: this.optionItems },
   };

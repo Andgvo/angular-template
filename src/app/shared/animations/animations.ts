@@ -1,4 +1,4 @@
-import { trigger, state, style, transition, animate, query, stagger, keyframes } from '@angular/animations';
+import { trigger, style, transition, animate, query, stagger, keyframes } from '@angular/animations';
 
 export function cardAnimation() {
     return trigger('cardAnimation', [

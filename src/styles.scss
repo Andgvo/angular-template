@@ -1,14 +1,14 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 // Plus imports for other components in your app.
-@use './assets/sass/palette.scss' as palette;
+@use "./assets/sass/palette.scss" as palette;
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
 $my-custom-typography: mat.define-typography-config(
-  $font-family: 'Open Sans',
+  $font-family: "Open Sans",
   $headline: mat.define-typography-level(2rem, 1, 600),
   $title: mat.define-typography-level(1.9rem, 1, 600),
   $subheading-2: mat.define-typography-level(1.7rem, 1, 600),
@@ -29,13 +29,15 @@ $angular-template-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$angular-template-theme: mat.define-light-theme((
-  color: (
-    primary: $angular-template-primary,
-    accent: $angular-template-accent,
-    warn: $angular-template-warn,
+$angular-template-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $angular-template-primary,
+      accent: $angular-template-accent,
+      warn: $angular-template-warn,
+    ),
   )
-));
+);
 
 // Custom buttons colors
 $custom-colors: mat.define-palette(palette.$custom-colors);
@@ -50,16 +52,18 @@ $custom-colors-keys: map-remove(palette.$custom-colors, contrast);
       color: map-get($custom-colors, contrast, $key);
     }
   }
-  .mat-button, .mat-stroked-button, .mat-icon-button {
+  .mat-button,
+  .mat-stroked-button,
+  .mat-icon-button {
     &.mat-#{$key} {
       color: map-get($custom-colors, $key);
     }
   }
-  .bd-callout-#{$key}{
+  .bd-callout-#{$key} {
     border-left-color: map-get($custom-colors, $key) !important;
   }
-  .card-header{
-    &.mat-#{$key}{
+  .card-header {
+    &.mat-#{$key} {
       background-color: map-get($custom-colors, $key) !important;
       color: map-get($custom-colors, contrast, $key) !important;
     }
@@ -71,8 +75,7 @@ $custom-colors-keys: map-remove(palette.$custom-colors, contrast);
 // that you are using.
 @include mat.all-component-themes($angular-template-theme);
 
-/////////////////////// BOOTSTRAP ///////////////////////////////
-// Override
+/////////////////////// COLORS ///////////////////////////////
 $primary: palette.$primary;
 $secondary: palette.$secondary;
 $success: palette.$success;
@@ -82,56 +85,61 @@ $danger: palette.$danger;
 $light: palette.$light;
 $dark: palette.$dark;
 
-// Bootstrap imports
-@import "../node_modules/bootstrap/scss/functions";
-@import "../node_modules/bootstrap/scss/mixins";
-@import "../node_modules/bootstrap/scss/bootstrap-grid.scss";
-@import "../node_modules/bootstrap/scss/containers";
-@import "../node_modules/bootstrap/scss/card";
-@import "../node_modules/bootstrap/scss/alert";
+//Tailwind
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-html, body { height: 100%; }
-body { margin: 0; }
-
-h5 { font-size: 1.1rem !important; }
-h6 { font-size: 1rem !important; }
-
-.container {
-  padding-bottom: 2rem;
-  width: inherit;
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
 }
 
-.no-border {
-  border: 0 !important;
+h5 {
+  font-size: 1.1rem !important;
 }
-
-/** OVERRIDE BOOTSTRAP **/
-.breadcrumb-item+.breadcrumb-item::before {
-	float: left;
-	padding-right: .5rem;
-	color: #6c757d;
-	content: var(--bs-breadcrumb-divider, "/")
-}
-
-.breadcrumb-item.active {
-	color: #6c757d
+h6 {
+  font-size: 1rem !important;
 }
 
 hr {
-  border-top: 1px solid rgba(0,0,0,.1);
+  padding-bottom: 0.6rem !important;
+}
+
+.container {
+  @apply px-3;
+}
+
+/** OVERRIDE BOOTSTRAP **/
+.breadcrumb-item + .breadcrumb-item::before {
+  float: left;
+  padding-right: 0.5rem;
+  color: #6c757d;
+  content: var(--bs-breadcrumb-divider, "/");
+}
+
+.breadcrumb-item.active {
+  color: #6c757d;
+}
+
+hr {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .border-bottom {
-  border-bottom: 1px solid #dee2e6!important;
+  border-bottom: 1px solid #dee2e6 !important;
 }
 
 /* Text align */
 .text-center {
-  text-align: center!important;
+  text-align: center !important;
 }
 
 .text-end {
-  text-align: right!important;
+  text-align: right !important;
 }
 
 /* bd-callout */
@@ -146,9 +154,11 @@ hr {
 /* Card */
 .card {
   border-radius: 40px !important;
-  .card-body{
+  @apply mat-elevation-z3;
+
+  .card-body {
     padding: 1.5rem 2rem;
-  }  
+  }
 }
 
 /** OVERRIDE ANGULAR **/
@@ -161,6 +171,23 @@ hr {
   position: relative !important;
   padding-bottom: 0 !important;
 }
+
+/* Checkbox */
+.mat-checkbox-layout, .mat-radio-label {
+  white-space: normal !important;
+}
+
+.mat-checkbox-inner-container {
+  margin-left: auto !important;
+  margin-top: 4px !important;
+  margin-right: 8px !important;
+  margin-bottom: auto !important;
+}
+
+.mat-radio-container {
+  align-self: flex-start;
+}
+
 
 /* Table */
 th.mat-header-cell {

@@ -1,21 +1,19 @@
 <!-- Filter section -->
-<div class="col-12">
-    <div class="row">
-        <div class="col-12 col-md-8 text-center">
-            <h5 class="pt-1" *ngIf="title !== ''">{{ title}}</h5>
-        </div>
-        <div class="col-12 col-md-4">
-            <mat-form-field appearance="outline" class="not-padding" @fadeInDown>
-                <mat-label>Filter</mat-label>
-                <input matInput #input class="not-padding" (keyup)="search(input.value)">
-                <mat-icon matSuffix>search</mat-icon>
-            </mat-form-field>
-        </div>
+<div class="grid grid-cols-1 sm:grid-cols-10">
+    <div class="col-span-1 md:col-span-6 text-center">
+        <h5 class="pt-1" *ngIf="title !== ''">{{ title}}</h5>
+    </div>
+    <div class="col-span-1 md:col-span-4">
+        <mat-form-field appearance="outline" class="not-padding" @fadeInDown>
+            <mat-label>Filter</mat-label>
+            <input matInput #input class="not-padding" (keyup)="search(input.value)">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
     </div>
 </div>
 <!-- Table -->
-<div class="col-12">
-    <table mat-table [dataSource]="dataSource" matSort>
+<div >
+    <table class="bg-transparent" mat-table [dataSource]="dataSource" matSort>
         <!-- Custom cotent -->
         <ng-content></ng-content>
         <!-- Default columns -->
@@ -40,6 +38,6 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page">
+    <mat-paginator class="bg-transparent" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page">
     </mat-paginator>
 </div>

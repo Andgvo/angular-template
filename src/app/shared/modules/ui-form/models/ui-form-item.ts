@@ -32,6 +32,10 @@ export interface UIFormItem {
    */
   label: string;
   /**
+   * Tailwin grid distrubution
+   */
+   col?: string;
+  /**
    * Required control. Default: true.
    */
   required?: boolean;
@@ -65,9 +69,9 @@ export interface UIFormItem {
    */
   optionItems?: UIOptionItem[];
   /**
-   * Boostrap cool distrubution
+   * Tailwind grid-cols for 'radio-button' and 'checkbox' elements
    */
-  col?: string;
+  optionItemCol?: string;
   /**
    * Textarea number of rows
    */

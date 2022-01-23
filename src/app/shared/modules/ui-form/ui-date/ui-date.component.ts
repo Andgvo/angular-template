@@ -60,8 +60,6 @@ export class UIDateComponent implements ControlValueAccessor {
         if (value) {
             this.value = (typeof value === 'string') ? value : value.toISOString();
             this.control.setValue(this.value);
-        } else {
-
         }
     }
 

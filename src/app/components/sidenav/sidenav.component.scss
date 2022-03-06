@@ -1,31 +1,63 @@
-.mat-toolbar{
-  position: fixed;
-  top: 0;
-  right: 0;
+.mat-toolbar {
+  background-color: #fafafa;
+  height: 48px;
   left: 0;
-  z-index: 1;
-  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 30%);
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 2;
+
+  .name-app {
+      font-size: 1rem !important;
+  }
 }
-  
-  .example-is-mobile .example-toolbar {
-    position: fixed;
-    /* Make sure the toolbar will stay on top of the content as it scrolls past. */
-    z-index: 2;
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+mat-sidenav-container {
+  padding-top: 58px !important;
+  position: relative;
+  z-index: 1;
+  display: block;
+  height: 100%;
+  overflow: auto;
+
+  mat-sidenav.sidenav {
+      background-color: #fafafa;
+      position: fixed !important;
+      top: 48px !important;
+      bottom: 0;
+      left: 0;
+      min-width: 150px;
   }
-  
-  h1.example-app-name {
-    margin-left: 8px;
+}
+
+.mat-list-base .mat-list-item {
+  font-size: inherit !important;
+  border-top-right-radius: 66px;
+  border-bottom-right-radius: 66px;
+
+  .ma-list-item-content {
+      padding: 0 25px !important;
   }
-  
-  .example-sidenav-container {
-    /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
-       causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
-    flex: 1;
-  }
-  
-  .example-is-mobile .example-sidenav-container {
-    /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
-       `<body>` to be our scrolling element for mobile layouts. */
-    flex: 1 0 auto;
-  }
-  
+}
+
+.mat-drawer-side {
+  border-right: inherit;
+}
+
+::ng-deep .mat-list-item-content {
+  padding-left: 20px !important;
+  padding-right: 30px !important;
+}
+
+.mat-list-base ::ng-deep .mat-list-item .mat-list-item-ripple {
+  border-top-right-radius: 66px;
+  border-bottom-right-radius: 66px;
+}
+
+.active-link {
+  background-color: red;
+}

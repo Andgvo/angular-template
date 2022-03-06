@@ -1,5 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { CARDS_HOME } from '@shared/routing/AppsRoute';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav',
@@ -9,19 +11,22 @@ import { MediaMatcher } from '@angular/cdk/layout';
 export class SidenavComponent implements OnDestroy {
 
   mobileQuery: MediaQueryList;
-
-  fillerNav = Array.from({ length: 15 }, (_, i) => `Nav Item ${i + 1}`);
+  navItems = CARDS_HOME;
 
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private route: Router) {
+    this.mobileQuery = media.matchMedia('(max-width: 992px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
+
+  goto(path: string){
+    this.route.navigate([path]);
   }
 
 }

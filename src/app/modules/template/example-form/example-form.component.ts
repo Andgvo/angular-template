@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { UIInputEnum } from '@shared/modules/ui-form/models/input-type';
 import { UIFormItemType } from '@shared/modules/ui-form/models/ui-form-item';
 import { UIOptionItem } from '@shared/modules/ui-form/models/ui-option-item';
@@ -79,7 +79,7 @@ export class ExampleFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(form: FormGroup) {
+  onSubmit(form: UntypedFormGroup) {
     if (form.valid) {
       console.log(form.value);
     } else {

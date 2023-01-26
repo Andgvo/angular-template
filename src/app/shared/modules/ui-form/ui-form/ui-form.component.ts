@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AfterViewChecked, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { fadeInDown } from '@shared/animations/animations';
 import { UIInputEnum } from '../models/input-type';
@@ -18,7 +18,7 @@ declare type ObjetInput = Record<string, ValueType | ValueType[]>;
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ]
 })
-export class UIFormComponent implements OnChanges {
+export class UIFormComponent implements OnChanges, AfterViewChecked {
 
   @Input() title = '';
   @Input() items: UIFormItemType | undefined;
@@ -31,25 +31,29 @@ export class UIFormComponent implements OnChanges {
   @Input() cancelLabel = 'Cancel';
   @Input() submitted = false;
   @Input() loading = false;
-  @Output() onSubmit = new EventEmitter<FormGroup>();
+  @Output() onSubmit = new EventEmitter<UntypedFormGroup>();
   @Output() onCancel = new EventEmitter<boolean>();
   public labels: UIFormLables;
   public inputs: UIFormItem[] = [];
 
-  formGroup: FormGroup = new FormGroup({});
+  formGroup: UntypedFormGroup = new UntypedFormGroup({});
   types = UIInputEnum;
 
-  constructor(private uiFormService: UIFormService, private adapter: DateAdapter<any>) {
+  constructor(private uiFormService: UIFormService, private adapter: DateAdapter<any>, private changeDetectorRef: ChangeDetectorRef) {
     this.labels = this.uiFormService.config.label ?? {};
     this.adapter.setLocale(uiFormService.config.locale);
+    //this.changeDetectorRef.detach();
+  }
+  ngAfterViewChecked(): void {
+    //this.changeDetectorRef.detach(); 
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.items && this.items !== undefined) {
-      this.formGroup = new FormGroup({});
+      this.formGroup = new UntypedFormGroup({});
       this.inputs = Object.entries(this.items).map(([key, input]) => {
         input.name = key;
-        const control = new FormControl(
+        const control = new UntypedFormControl(
           { value: input.value ?? '', disabled: input.disabled ?? false }, this.addValidators(input));
         input.control = control;
         if (input.onChanges) {
@@ -59,6 +63,7 @@ export class UIFormComponent implements OnChanges {
         return input;
       });
       this.formGroup.setValidators(this.validators);
+      //this.changeDetectorRef.markForCheck();
     }
     if (changes.object && this.object != undefined) {
       if (this.inputs.length !== 0) {

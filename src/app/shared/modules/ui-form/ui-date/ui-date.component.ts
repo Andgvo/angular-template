@@ -1,5 +1,5 @@
 import { Component, forwardRef, Input } from "@angular/core";
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { ControlValueAccessor, UntypedFormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 import { MatFormFieldAppearance } from "@angular/material/form-field";
 import { UIFormLables, UIFormService } from "../service/ui-form.service";
@@ -45,7 +45,7 @@ export class UIDateComponent implements ControlValueAccessor {
 
 
     value: string = '';
-    control = new FormControl('');
+    control = new UntypedFormControl('');
     labels: UIFormLables;
 
     onChange = (_: string) => { }

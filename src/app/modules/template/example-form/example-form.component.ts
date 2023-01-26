@@ -37,6 +37,7 @@ export class ExampleFormComponent implements OnInit {
     radio: { label: 'Radio button', type: UIInputEnum.radioButton, optionItems: this.optionItems },
     checkbox: { label: 'Checkbox', type: UIInputEnum.checkbox, optionItems: this.optionItems },
   };
+
   public optionItemsDynamic: UIOptionItem[] = [
     { value: 1, label: 'Option 1' },
     { value: 2, label: 'Option 2' },

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { fadeInDown } from '@shared/animations/animations';
@@ -18,7 +18,7 @@ declare type ObjetInput = Record<string, ValueType | ValueType[]>;
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ]
 })
-export class UIFormComponent implements OnChanges {
+export class UIFormComponent implements OnChanges, AfterViewChecked {
 
   @Input() title = '';
   @Input() items: UIFormItemType | undefined;
@@ -39,9 +39,13 @@ export class UIFormComponent implements OnChanges {
   formGroup: UntypedFormGroup = new UntypedFormGroup({});
   types = UIInputEnum;
 
-  constructor(private uiFormService: UIFormService, private adapter: DateAdapter<any>) {
+  constructor(private uiFormService: UIFormService, private adapter: DateAdapter<any>, private changeDetectorRef: ChangeDetectorRef) {
     this.labels = this.uiFormService.config.label ?? {};
     this.adapter.setLocale(uiFormService.config.locale);
+    //this.changeDetectorRef.detach();
+  }
+  ngAfterViewChecked(): void {
+    //this.changeDetectorRef.detach(); 
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -59,6 +63,7 @@ export class UIFormComponent implements OnChanges {
         return input;
       });
       this.formGroup.setValidators(this.validators);
+      //this.changeDetectorRef.markForCheck();
     }
     if (changes.object && this.object != undefined) {
       if (this.inputs.length !== 0) {
@@ -92,6 +97,8 @@ export class UIFormComponent implements OnChanges {
   }
 
   trackBy(index: number, item: UIFormItem) {
+    console.log('=========>');
+    console.log(item.name);
     return item.name ?? '';
   }
   /**

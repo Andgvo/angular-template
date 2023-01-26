@@ -97,8 +97,6 @@ export class UIFormComponent implements OnChanges, AfterViewChecked {
   }
 
   trackBy(index: number, item: UIFormItem) {
-    console.log('=========>');
-    console.log(item.name);
     return item.name ?? '';
   }
   /**

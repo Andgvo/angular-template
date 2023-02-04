@@ -1,12 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
+import { BreadcrumbModule } from '@shared/modules/breadcrumb/breadcrumb.module';
 import { UIInputEnum } from '@shared/modules/ui-form/models/input-type';
 import { UIFormItemType } from '@shared/modules/ui-form/models/ui-form-item';
 import { UIOptionItem } from '@shared/modules/ui-form/models/ui-option-item';
+import { UIFormModule } from '@shared/modules/ui-form/ui-form.module';
 import { ROUTE_DYNAMIC_FORM } from '@shared/routing/AppsRoute';
 
 @Component({
+  standalone: true,
   selector: 'app-example-form',
+  imports: [
+    BreadcrumbModule,
+    UIFormModule
+  ],
   templateUrl: './example-form.component.html',
   styleUrls: ['./example-form.component.scss']
 })

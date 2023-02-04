@@ -1,6 +1,12 @@
 import { SelectionModel } from '@angular/cdk/collections';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { BreadcrumbModule } from '@shared/modules/breadcrumb/breadcrumb.module';
 import { UITableItem } from '@shared/modules/ui-table/models/ui-table-item';
+import { UITableModule } from '@shared/modules/ui-table/ui-table.module';
 import { ROUTE_TABLE } from '@shared/routing/AppsRoute';
 
 export interface PeriodicElement {
@@ -34,7 +40,16 @@ const ELEMENT_DATA: PeriodicElement[] = [
 ];
 
 @Component({
+  standalone: true,
   selector: 'app-example-table',
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    BreadcrumbModule,
+    UITableModule
+  ],
   templateUrl: './example-table.component.html',
   styleUrls: ['./example-table.component.scss']
 })

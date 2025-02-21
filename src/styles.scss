@@ -3,6 +3,11 @@
 @use "@angular/material" as mat;
 // Plus imports for other components in your app.
 @use "./assets/sass/palette.scss" as palette;
+// Tailwind
+// This is first because override other styles
+//@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 @include mat.core();
 
@@ -14,7 +19,7 @@ $angular-template-accent: mat.define-palette(mat.$amber-palette, 600);
 $angular-template-warn: mat.define-palette(mat.$red-palette);
 
 $my-custom-typography: mat.define-typography-config(
-  $font-family: "Open Sans"
+  $font-family: 'Open Sans'
 );
 /*
   $headline-5: mat.define-typography-level(2rem, 1, 600),
@@ -35,7 +40,7 @@ $angular-template-theme: mat.define-light-theme(
       accent: $angular-template-accent,
       warn: $angular-template-warn,
     ),
-    typography: $my-custom-typography,
+    //typography: $my-custom-typography,
   )
 );
 
@@ -85,24 +90,13 @@ $danger: palette.$danger;
 $light: palette.$light;
 $dark: palette.$dark;
 
-//Tailwind
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-
 html,
 body {
   height: 100%;
 }
 body {
   margin: 0;
-}
-
-h5 {
-  font-size: 1.1rem !important;
-}
-h6 {
-  font-size: 1rem !important;
+  font-family: 'Open Sans', "Helvetica Neue", sans-serif;
 }
 
 hr {
